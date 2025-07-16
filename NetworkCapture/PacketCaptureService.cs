@@ -1,0 +1,140 @@
+﻿using log4net.Core;
+using PacketDotNet;
+using SharpPcap;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
+using System.Linq;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using Utilities;
+
+namespace NetworkCapture
+{
+    public class PacketEventArgs : EventArgs
+    {
+        public DateTime Time { get; set; }
+        public string Source { get; set; }
+        public string SourcePort { get; set; }
+        public string SourceHost { get; set; }
+
+        public string Destination { get; set; }
+        public string DestinationPort { get; set; }
+        public string DestinationHost { get; set; }
+        public string Protocol { get; set; }
+        public int Length { get; set; }
+    }
+    public class PacketCaptureService
+    {
+
+        ICaptureDevice _currentDevice;
+        public event EventHandler<PacketEventArgs> PacketReceived;
+        private static readonly log4net.ILog log = LogHelper.GetLogger();
+
+
+        public PacketCaptureService() { 
+        
+        }
+
+        public List<ICaptureDevice> getDevices()
+        {
+            var devices = CaptureDeviceList.Instance;
+            if (devices.Count < 1)
+            {
+                Console.WriteLine("No devices found.");
+                return null;
+            }
+            var result = new List<ICaptureDevice>();
+            foreach (var dev in devices)
+            {
+                result.Add(dev);
+            }
+            return result;
+        }
+
+        public void startCapture(string deviceName, int readTimeoutMilliseconds)
+        {
+            try
+            {
+                var devices = CaptureDeviceList.Instance;
+                ICaptureDevice selectedDevice = devices.FirstOrDefault(d => d.Name == deviceName);
+                selectedDevice.OnPacketArrival += new PacketArrivalEventHandler(OnPacketArrival);
+                if (selectedDevice == null)
+                {
+                    Console.WriteLine("Device not found.");
+                    return;
+                }
+                selectedDevice.Open(DeviceMode.Promiscuous, readTimeoutMilliseconds);
+                _currentDevice = selectedDevice;
+                selectedDevice.StartCapture();
+            } catch (Exception ex)
+            {
+                log.Error("Error starting packet capture", ex);
+            }
+
+        }
+
+        public void stopCapture(ICaptureDevice device)
+        {
+            device.StopCapture();
+        }
+        private void OnPacketArrival(object sender, CaptureEventArgs e)
+        {
+            try
+            {
+                var time = e.Packet.Timeval.Date;
+                var raw = e.Packet;
+                var len = e.Packet.Data.Length;
+
+                var packet = Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
+                var ip = packet.Extract<IPPacket>();
+                var tcp = packet.Extract<TcpPacket>();
+                var udp = packet.Extract<UdpPacket>();
+
+                string srcHost = "";
+                string dstHost = "";
+
+                try { if (ip != null) srcHost = Dns.GetHostEntry(ip.SourceAddress).HostName; } catch (Exception ex) { Console.WriteLine("Could not get srcHost " + ex); srcHost = "N/A"; }
+                try { if (ip != null) dstHost = Dns.GetHostEntry(ip.DestinationAddress).HostName; } catch (Exception ex) { Console.WriteLine("Could not get destHost " + ex); dstHost = "N/A"; }
+
+                string src = ip?.SourceAddress.ToString() ?? "Unknown Source";
+                string srcPort = tcp?.SourcePort.ToString() ?? udp?.SourcePort.ToString() ?? "Unknown Source Port";
+                string dst = ip?.DestinationAddress.ToString() ?? "Unknown Destination";
+                string dstPort = tcp?.DestinationPort.ToString() ?? udp?.DestinationPort.ToString() ?? "Unknown Destination Port";
+                string protocol = packet.GetType().Name;
+
+
+                PacketReceived?.Invoke(this, new PacketEventArgs
+                {
+                    Time = time,
+                    Source = src,
+                    SourcePort = srcPort,
+                    SourceHost = srcHost,
+                    Destination = dst,
+                    DestinationPort = dstPort,
+                    DestinationHost = dstHost,
+                    Protocol = protocol,
+                    Length = raw.Data.Length
+                });
+            } catch (Exception ex)
+            {
+                log.Error("Error get information from packet", ex);
+            }
+        }
+
+        public List<string> getPackets(string time)
+        {
+                var packets = new List<string>();
+            try
+            {
+                packets.Add(time);
+            } catch (Exception ex)
+            {
+                log.Error("Error getting packet and adding the time", ex);
+            }
+            return packets;
+        }
+    }
+}
