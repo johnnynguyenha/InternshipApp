@@ -81,6 +81,7 @@
             this.passwordBox.Name = "passwordBox";
             this.passwordBox.Size = new System.Drawing.Size(360, 22);
             this.passwordBox.TabIndex = 4;
+            this.passwordBox.UseSystemPasswordChar = true;
             this.passwordBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.passwordBox_KeyPress);
             // 
             // loginButton
