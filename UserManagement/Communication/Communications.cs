@@ -50,6 +50,7 @@ namespace InternshipApp
             _portService = new PortService(serialPort1);
             buffer = new StringBuilder();
             OpenSettingsForm();
+            disconnectButton.Enabled = false;
 
         }
         private void OpenSettingsForm()

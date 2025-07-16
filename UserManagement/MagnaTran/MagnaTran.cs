@@ -32,6 +32,7 @@ namespace InternshipApp
         {
             InitializeComponent();
             _ready = false;
+            disconnectButton.Enabled = false;
         }
 
         private void initializeTCPService()

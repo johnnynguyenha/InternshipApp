@@ -113,17 +113,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommPageSettings.cs" />
-    <Compile Include="CommSettings.cs">
+    <Compile Include="Communication\CommPageSettings.cs" />
+    <Compile Include="Communication\CommSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CommSettings.Designer.cs">
+    <Compile Include="Communication\CommSettings.Designer.cs">
       <DependentUpon>CommSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Communications.cs">
+    <Compile Include="Communication\Communications.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Communications.Designer.cs">
+    <Compile Include="Communication\Communications.Designer.cs">
       <DependentUpon>Communications.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\AdminChangePassword.cs">
@@ -186,10 +186,10 @@
     <Compile Include="MagnaTran\Script.Designer.cs">
       <DependentUpon>Script.cs</DependentUpon>
     </Compile>
-    <Compile Include="PacketCapture.cs">
+    <Compile Include="PacketCapture\PacketCapture.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PacketCapture.Designer.cs">
+    <Compile Include="PacketCapture\PacketCapture.Designer.cs">
       <DependentUpon>PacketCapture.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -200,10 +200,10 @@
     <Compile Include="Login\SignUp.Designer.cs">
       <DependentUpon>SignUp.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CommSettings.resx">
+    <EmbeddedResource Include="Communication\CommSettings.resx">
       <DependentUpon>CommSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Communications.resx">
+    <EmbeddedResource Include="Communication\Communications.resx">
       <DependentUpon>Communications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\AdminChangePassword.resx">
@@ -236,7 +236,7 @@
     <EmbeddedResource Include="MagnaTran\Script.resx">
       <DependentUpon>Script.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PacketCapture.resx">
+    <EmbeddedResource Include="PacketCapture\PacketCapture.resx">
       <DependentUpon>PacketCapture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
