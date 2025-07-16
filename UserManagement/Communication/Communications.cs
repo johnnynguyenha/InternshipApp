@@ -246,6 +246,8 @@ namespace InternshipApp
                     _portService.setDataBits(_dataBits); // set data bits
                     _portService.setStopBits(_stopBits); // set stop bits
                     _portService.setParity(_parity); // set parity
+                    _portService.setDtr(_dtrEnabled);
+                    _portService.setRts(_rtsEnabled);
 
                     _portService.openPort();
                     chatBox.AppendText("Connected to " + _comPortName + "\r\n");
