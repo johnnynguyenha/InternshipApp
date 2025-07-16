@@ -80,7 +80,7 @@ namespace InternshipApp
                     var comSettings = new CommPageSettings
                     {
                         PortName = comPortCBox.Text,
-                        BaudRate = int.Parse(baudRateCBox.Text),
+                        BaudRate = int.Parse(baudRateCBox.Text),    
                         DataBits = int.Parse(dataBitsCBox.Text),
                         StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBitsCBox.Text),
                         ParityBits = (Parity)Enum.Parse(typeof(Parity), parityBitsCBox.Text),
