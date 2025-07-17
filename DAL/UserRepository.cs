@@ -102,13 +102,49 @@ namespace DAL
             }
             _user.Role = role;
         }
+        public void UpdatePerm(User user, string perm, bool value)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null");
+            }
+            if (string.IsNullOrWhiteSpace(perm))
+            {
+                throw new ArgumentNullException(nameof(perm), "Permission cannot be null or empty");
+            }
+            switch (perm.ToLower())
+            {
+                case "communication":
+                    user.commPerm = value;
+                    break;
+                case "network":
+                    user.networkPerm = value;
+                    break;
+                case "magnatran":
+                    user.magnaPerm = value;
+                    break;
+                case "manage":
+                    user.managePerm = value;
+                    break;
+                case "details":
+                    user.detailsPerm = value;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid permission type", nameof(perm));
+            }
+        }
         public bool CreateUser(string username, string password, string role)
         {
             var newUser = new User()
             {
                 UserName = username,
                 Password = password,
-                Role = role
+                Role = role,
+                commPerm = true,
+                networkPerm = true,
+                magnaPerm = true,
+                managePerm = true,
+                detailsPerm = true
             };
             _context.Users.Add(newUser);
             return true;

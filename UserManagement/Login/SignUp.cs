@@ -33,6 +33,16 @@ namespace InternshipApp
             string password = passwordBox.Text;
             string confirmPassword = confirmPasswordBox.Text;
             string message = "";
+
+            Dictionary<string, bool> permissions = new Dictionary<string, bool>
+            {
+                { "Communication", permissionCheckBox.CheckedItems.Contains("Communication") },
+                { "Network", permissionCheckBox.CheckedItems.Contains("Network") },
+                { "MagnaTran", permissionCheckBox.CheckedItems.Contains("MagnaTran") },
+                { "Details", permissionCheckBox.CheckedItems.Contains("Details") },
+                { "Manage", permissionCheckBox.CheckedItems.Contains("Manage") }
+            };
+
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
             {
                 MessageBox.Show("Please fill in all fields.");
@@ -45,6 +55,10 @@ namespace InternshipApp
                     _userService.Register(username, password, confirmPassword, out message);
                     if (message == "Register was Successful")
                     {
+                        foreach (var perm in permissions)
+                        {
+                            _userService.setPerm(username, perm.Key, perm.Value, out message);
+                        }
                         this.Close();
                     }
                 }

@@ -166,7 +166,7 @@ namespace InternshipApp
                 deletePopup delete = new deletePopup(username, _userService);
                 delete.StartPosition = FormStartPosition.CenterScreen;
                 delete.UserUpdated += UserUpdated;
-                delete.Show();
+                delete.ShowDialog();
             }
         }
 
@@ -239,6 +239,13 @@ namespace InternshipApp
             AdminChangePassword changePassword = new AdminChangePassword(_userService, _selecteduser);
             changePassword.StartPosition = FormStartPosition.CenterScreen;
             changePassword.ShowDialog();
+        }
+
+        private void createButton_Click(object sender, EventArgs e)
+        {
+            SignUp signup = new SignUp(_userService);
+            signup.StartPosition = FormStartPosition.CenterScreen;
+            signup.ShowDialog();
         }
     }
 }

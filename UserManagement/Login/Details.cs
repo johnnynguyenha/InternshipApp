@@ -109,7 +109,7 @@ namespace InternshipApp
         {
             ChangePassword changePassword = new ChangePassword(_userService, _user);
             changePassword.StartPosition = FormStartPosition.CenterScreen;
-            changePassword.Show();
+            changePassword.ShowDialog();
         }
 
         private void logOutButton_Click(object sender, EventArgs e)
@@ -129,7 +129,7 @@ namespace InternshipApp
             }
             deletePopup deleteForm = new deletePopup(_user, _mainmenu, _userService);
             deleteForm.StartPosition = FormStartPosition.CenterScreen;
-            deleteForm.Show();
+            deleteForm.ShowDialog();
         }
     }
 }

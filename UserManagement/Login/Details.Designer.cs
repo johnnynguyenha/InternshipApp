@@ -187,7 +187,9 @@
             // 
             // logOutButton
             // 
-            this.logOutButton.BackColor = System.Drawing.Color.DarkRed;
+            this.logOutButton.BackColor = System.Drawing.Color.IndianRed;
+            this.logOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logOutButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.logOutButton.Location = new System.Drawing.Point(694, 12);
             this.logOutButton.Name = "logOutButton";
             this.logOutButton.Size = new System.Drawing.Size(94, 29);

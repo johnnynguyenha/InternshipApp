@@ -36,6 +36,7 @@
             this.confirmPasswordBox = new System.Windows.Forms.TextBox();
             this.confirmPasswordLabel = new System.Windows.Forms.Label();
             this.registerButton = new System.Windows.Forms.Button();
+            this.permissionCheckBox = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
             // passwordBox
@@ -110,11 +111,26 @@
             this.registerButton.UseVisualStyleBackColor = true;
             this.registerButton.Click += new System.EventHandler(this.registerButton_Click);
             // 
+            // permissionCheckBox
+            // 
+            this.permissionCheckBox.FormattingEnabled = true;
+            this.permissionCheckBox.Items.AddRange(new object[] {
+            "Communication",
+            "Network",
+            "MagnaTran",
+            "Details",
+            "Manage"});
+            this.permissionCheckBox.Location = new System.Drawing.Point(640, 132);
+            this.permissionCheckBox.Name = "permissionCheckBox";
+            this.permissionCheckBox.Size = new System.Drawing.Size(134, 123);
+            this.permissionCheckBox.TabIndex = 13;
+            // 
             // SignUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.permissionCheckBox);
             this.Controls.Add(this.registerButton);
             this.Controls.Add(this.confirmPasswordLabel);
             this.Controls.Add(this.confirmPasswordBox);
@@ -140,5 +156,6 @@
         private System.Windows.Forms.TextBox confirmPasswordBox;
         private System.Windows.Forms.Label confirmPasswordLabel;
         private System.Windows.Forms.Button registerButton;
+        private System.Windows.Forms.CheckedListBox permissionCheckBox;
     }
 }

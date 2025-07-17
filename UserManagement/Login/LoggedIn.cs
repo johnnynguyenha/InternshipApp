@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BL;
+using InternshipApp.Communication;
 using Model;
 
 namespace InternshipApp
@@ -135,8 +136,8 @@ namespace InternshipApp
         {
             resetButtonsColor();
             commButton.BackColor = Color.LightBlue;
-            Communications commForm = new Communications();
-            LoadFormInPanel(commForm);
+            UCCommunications comm = new UCCommunications();
+            LoadUCInPanel(comm);
 
         }
 
@@ -151,7 +152,7 @@ namespace InternshipApp
         {
             Details editDetails = new Details(_userService, _user, this, _login);
             editDetails.StartPosition = FormStartPosition.CenterScreen;
-            editDetails.Show();
+            editDetails.ShowDialog();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -175,6 +176,15 @@ namespace InternshipApp
             panel1.Tag = formToLoad;
 
             formToLoad.Show();
+        }
+
+        private void LoadUCInPanel(UserControl userControlToLoad)
+        {
+            panel1.Controls.Clear(); // Remove existing controls
+            userControlToLoad.Dock = DockStyle.Fill; // Fills the panel
+            panel1.Controls.Add(userControlToLoad);
+            panel1.Tag = userControlToLoad;
+            userControlToLoad.Show();
         }
 
         private void packetButton_Click(object sender, EventArgs e)

@@ -496,5 +496,28 @@ namespace BL
             message = "Password changed successfully";
             return true;
         }
+
+        public bool setPerm(string username, string perm, bool value, out string message)
+        {
+            User user;
+            try
+            {
+                user = _unitOfWork.Users.GetUserByUsername(username);
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Exception in retrieving User {username} when ChangePassword.", ex);
+                message = "An error occurred when trying to change the password";
+                return false;
+            }
+            if (user == null)
+            {
+                message = "User not found";
+                return false;
+            }
+            _unitOfWork.Users.UpdatePerm(user, perm, value);
+            message = "Permission changed successfully.";
+            return true;
+        }
     }
 }

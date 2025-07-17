@@ -49,6 +49,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.changePasswordButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.createButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -223,6 +224,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.createButton);
             this.groupBox1.Controls.Add(this.changePasswordButton);
             this.groupBox1.Controls.Add(this.editButton);
             this.groupBox1.Controls.Add(this.deleteButton);
@@ -246,6 +248,16 @@
             this.groupBox1.Size = new System.Drawing.Size(390, 360);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
+            // 
+            // createButton
+            // 
+            this.createButton.Location = new System.Drawing.Point(6, 123);
+            this.createButton.Name = "createButton";
+            this.createButton.Size = new System.Drawing.Size(96, 49);
+            this.createButton.TabIndex = 20;
+            this.createButton.Text = "Create Account";
+            this.createButton.UseVisualStyleBackColor = true;
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // Manage
             // 
@@ -286,5 +298,6 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button changePasswordButton;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button createButton;
     }
 }

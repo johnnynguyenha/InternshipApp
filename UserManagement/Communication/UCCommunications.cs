@@ -10,14 +10,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities;
 using static InternshipApp.CommSettings;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-using Utilities;
 
-namespace InternshipApp
+namespace InternshipApp.Communication
 {
-    public partial class Communications : Form
+    public partial class UCCommunications : UserControl
     {
         private string _comPortName;
         private int _comBaudRate;
@@ -42,14 +42,12 @@ namespace InternshipApp
         string sendWith;
         PortService _portService;
         private StringBuilder buffer;
-
-        public Communications()
+        public UCCommunications()
         {
             InitializeComponent();
             initializeTCPService(); // initialize TCP service
             _portService = new PortService(serialPort1);
             buffer = new StringBuilder();
-            OpenSettingsForm();
             disconnectButton.Enabled = false;
 
         }
@@ -244,98 +242,7 @@ namespace InternshipApp
             }
         }
 
-        // connect using com or tcp
-        private async void connectButton_Click(object sender, EventArgs e)
-        {
-            if (_usingCom)
-            {
-                try
-                {
-                    _portService.setPortName(_comPortName); // set port name
-                    _portService.setBaudRate(_comBaudRate); // set baud rate
-                    _portService.setDataBits(_dataBits); // set data bits
-                    _portService.setStopBits(_stopBits); // set stop bits
-                    _portService.setParity(_parity); // set parity
-                    _portService.setDtr(_dtrEnabled);
-                    _portService.setRts(_rtsEnabled);
-
-                    _portService.openPort();
-                    chatBox.AppendText("Connected to " + _comPortName + "\r\n");
-                    connectButton.Enabled = false;
-                    disconnectButton.Enabled = true;
-                    serialPort1.DataReceived += SerialPort1_DataReceived;
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error setting connecting to COM Port. Check connections and fields.");
-                    log.Error("Error occurred when trying to connect with COM.", ex);
-                    connectButton.Enabled = true;
-                    disconnectButton.Enabled = false;
-                    return;
-                }
-            }
-            else
-            {
-                initializeTCPService(); // reiinitialize TCP service
-                try
-                {
-                    connectButton.Enabled = false;
-                    disconnectButton.Enabled = false;
-                    bool success = await _tcpServiceClient.ConnectServerAsync(_tcpIpAddress, _tcpPort);
-                    if (success)
-                    {
-                        chatBox.AppendText("Connected to server at " + _tcpIpAddress + ":" + _tcpPort + "\r\n");
-                        disconnectButton.Enabled = true;
-                        connectButton.Enabled = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to connect to server.");
-                        connectButton.Enabled = true;
-                        disconnectButton.Enabled = false;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error occurred when trying to connect to TCP server. Check connection and fields.");
-                    log.Error("Error connecting to TCP server", ex);
-                    connectButton.Enabled = true;
-                    disconnectButton.Enabled = false;
-                    return;
-                }
-            }
-        }
-
-        // disconnect using com or tcp
-        private void disconnectButton_Click(object sender, EventArgs e)
-        {
-            if (_usingCom)
-            {
-                if (_portService.isPortOpen())
-                {
-                    serialPort1.DataReceived -= SerialPort1_DataReceived;
-                    _portService.closePort(); // close the port
-                    chatBox.AppendText("Disconnected from " + _comPortName + "\r\n");
-                    connectButton.Enabled = true;
-                    disconnectButton.Enabled = false;
-
-                }
-                else
-                {
-                    MessageBox.Show("Port is not open."); // show message if port is not open
-                    connectButton.Enabled = false;
-                    disconnectButton.Enabled = true;
-                }
-            } else
-            {
-                _tcpServiceClient.Disconnect(); // disconnect from TCP server
-                chatBox.AppendText("Disconnected from " + _tcpIpAddress + " on port " + _tcpPort + "\r\n");
-                connectButton.Enabled = true;
-                disconnectButton.Enabled = false;
-            }
-        }
-
+ 
         // receive data using com
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -380,32 +287,6 @@ namespace InternshipApp
             }
         }
 
-        // send data using com or tcp
-        private void sendBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (_usingCom) { // check if enter key is pressed   
-                    ComSendMessage();
-                }
-                else
-                {
-                    TcpSendMessage();
-                }
-            }
-        }
-
-        // send data using com or tcp through button
-        private void sendButton_Click(object sender, EventArgs e)
-        {
-            if (_usingCom)
-            {
-                ComSendMessage();
-            } else
-            {
-                TcpSendMessage();
-            }
-        }
 
         // send message using com
         private void ComSendMessage()
@@ -431,14 +312,8 @@ namespace InternshipApp
             }
         }
 
-        private void settingsButton_Click(object sender, EventArgs e)
-        {
-            OpenSettingsForm();
-        }
-
         // start tcp server
-
-        private async void startButton_Click(object sender, EventArgs e)
+        private async void startButton_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -456,7 +331,8 @@ namespace InternshipApp
                         MessageBox.Show("Failed to start server. Please check the port number.");
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Error occurred when trying to start TCP server. Check connection and fields.");
                 log.Error("Error starting TCP server", ex);
@@ -464,6 +340,139 @@ namespace InternshipApp
                 disconnectButton.Visible = false;
             }
         }
+
+        private async void connectButton_Click_1(object sender, EventArgs e)
+        {
+            {
+                if (_usingCom)
+                {
+                    try
+                    {
+                        _portService.setPortName(_comPortName); // set port name
+                        _portService.setBaudRate(_comBaudRate); // set baud rate
+                        _portService.setDataBits(_dataBits); // set data bits
+                        _portService.setStopBits(_stopBits); // set stop bits
+                        _portService.setParity(_parity); // set parity
+                        _portService.setDtr(_dtrEnabled);
+                        _portService.setRts(_rtsEnabled);
+
+                        _portService.openPort();
+                        chatBox.AppendText("Connected to " + _comPortName + "\r\n");
+                        connectButton.Enabled = false;
+                        disconnectButton.Enabled = true;
+                        serialPort1.DataReceived += SerialPort1_DataReceived;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error setting connecting to COM Port. Check connections and fields.");
+                        log.Error("Error occurred when trying to connect with COM.", ex);
+                        connectButton.Enabled = true;
+                        disconnectButton.Enabled = false;
+                        return;
+                    }
+                }
+                else
+                {
+                    initializeTCPService(); // reiinitialize TCP service
+                    try
+                    {
+                        connectButton.Enabled = false;
+                        disconnectButton.Enabled = false;
+                        bool success = await _tcpServiceClient.ConnectServerAsync(_tcpIpAddress, _tcpPort);
+                        if (success)
+                        {
+                            chatBox.AppendText("Connected to server at " + _tcpIpAddress + ":" + _tcpPort + "\r\n");
+                            disconnectButton.Enabled = true;
+                            connectButton.Enabled = false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to connect to server.");
+                            connectButton.Enabled = true;
+                            disconnectButton.Enabled = false;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error occurred when trying to connect to TCP server. Check connection and fields.");
+                        log.Error("Error connecting to TCP server", ex);
+                        connectButton.Enabled = true;
+                        disconnectButton.Enabled = false;
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void disconnectButton_Click_1(object sender, EventArgs e)
+        {
+            {
+                if (_usingCom)
+                {
+                    if (_portService.isPortOpen())
+                    {
+                        serialPort1.DataReceived -= SerialPort1_DataReceived;
+                        _portService.closePort(); // close the port
+                        chatBox.AppendText("Disconnected from " + _comPortName + "\r\n");
+                        connectButton.Enabled = true;
+                        disconnectButton.Enabled = false;
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Port is not open."); // show message if port is not open
+                        connectButton.Enabled = false;
+                        disconnectButton.Enabled = true;
+                    }
+                }
+                else
+                {
+                    _tcpServiceClient.Disconnect(); // disconnect from TCP server
+                    chatBox.AppendText("Disconnected from " + _tcpIpAddress + " on port " + _tcpPort + "\r\n");
+                    connectButton.Enabled = true;
+                    disconnectButton.Enabled = false;
+                }
+            }
+        }
+
+        private void settingsButton_Click_1(object sender, EventArgs e)
+        {
+            OpenSettingsForm();
+        }
+
+        private void sendButton_Click_1(object sender, EventArgs e)
+        {
+            {
+                if (_usingCom)
+                {
+                    ComSendMessage();
+                }
+                else
+                {
+                    TcpSendMessage();
+                }
+            }
+        }
+
+        private void sendBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (_usingCom)
+                { // check if enter key is pressed   
+                    ComSendMessage();
+                }
+                else
+                {
+                    TcpSendMessage();
+                }
+            }
+        }
+
+        private void UCCommunications_Load(object sender, EventArgs e)
+        {
+            OpenSettingsForm();
+        }
     }
 }
-

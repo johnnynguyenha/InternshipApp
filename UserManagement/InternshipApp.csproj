@@ -126,6 +126,12 @@
     <Compile Include="Communication\Communications.Designer.cs">
       <DependentUpon>Communications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Communication\UCCommunications.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Communication\UCCommunications.Designer.cs">
+      <DependentUpon>UCCommunications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\AdminChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Communication\Communications.resx">
       <DependentUpon>Communications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Communication\UCCommunications.resx">
+      <DependentUpon>UCCommunications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\AdminChangePassword.resx">
       <DependentUpon>AdminChangePassword.cs</DependentUpon>

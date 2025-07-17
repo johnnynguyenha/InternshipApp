@@ -138,7 +138,8 @@ namespace InternshipApp
                     log.Error("Error applying TCP Server settings", ex);
                 }
             }
-                this.Close();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
             }
         }
 }

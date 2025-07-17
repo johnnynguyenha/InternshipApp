@@ -22,6 +22,7 @@ namespace InternshipApp
         {
             InitializeComponent();
             _userService = userService;
+            registerLinkLabel.Visible = false;
         }
 
         // FUNCTIONS //

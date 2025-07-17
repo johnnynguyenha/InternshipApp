@@ -330,8 +330,8 @@ namespace InternshipApp
                     _script = new Script();
                     _script.RunScriptClicked += Script_RunScriptClicked; // Subscribe to event
                 }
-
-                _script.Show();
+                _script.StartPosition = FormStartPosition.CenterScreen;
+                _script.ShowDialog();
                 _script.BringToFront();
             }
             catch (Exception ex)
