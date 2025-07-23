@@ -38,6 +38,9 @@ namespace InternshipApp.Login
             _username = _user.UserName;
             SetVisibility(false);
             CreateGrid();
+            _bindingUsers = new BindingList<User>(userList);
+            _usersBindingSource = new BindingSource(_bindingUsers, null);
+            usersDataGridView.DataSource = _usersBindingSource;
             FillGrid();
 
         }
@@ -113,13 +116,61 @@ namespace InternshipApp.Login
 
 
             usersDataGridView.AutoGenerateColumns = false;
-            usersDataGridView.DataSource = null; // Clear old binding
-            usersDataGridView.DataSource = new BindingList<User>(userList);
+            usersDataGridView.DataSource = null;
+            _bindingUsers = new BindingList<User>(userList);
+            _usersBindingSource.DataSource = _bindingUsers;
+            usersDataGridView.DataSource = _usersBindingSource;
 
             usersProgressBar.Visible = false;
             _isFilling = false;
 
 
+        }
+        /// <summary>
+        /// Helper function to update user details in the DataGridView after changes are made.
+        /// </summary>
+        /// <param name="updatedUser"></param>
+        private void UpdateUserInGrid(User updatedUser)
+        {
+            var index = _bindingUsers.ToList().FindIndex(u => _userService.GetUserName(u) == _userService.GetUserName(updatedUser));
+            if (index >= 0)
+            {
+                _bindingUsers[index].UserName = updatedUser.UserName;
+                _bindingUsers[index].FirstName = updatedUser.FirstName;
+                _bindingUsers[index].LastName = updatedUser.LastName;
+
+                _bindingUsers.ResetItem(index);
+            }
+        }
+
+        /// <summary>
+        /// Helper function to remove a user from the DataGridView after deletion.
+        /// </summary>
+        /// <param name="deletedUser"></param>
+        private void RemoveUserFromGrid(User deletedUser)
+        {
+            var userToRemove = _bindingUsers.FirstOrDefault(u => _userService.GetUserName(u) == _userService.GetUserName(deletedUser));
+            if (userToRemove != null)
+            {
+                _bindingUsers.Remove(userToRemove);
+            }
+        }
+
+        /// <summary>
+        /// Helper function to add a new user to the DataGridView after creation.
+        /// </summary>
+        /// <param name="newUser"></param>
+        private void AddUserToGrid(User newUser)
+        {
+            if (_bindingUsers == null || newUser == null)
+                return;
+
+            // Prevent duplicates based on username
+            bool alreadyExists = _bindingUsers.Any(u => _userService.GetUserName(u) == _userService.GetUserName(newUser));
+            if (!alreadyExists)
+            {
+                _bindingUsers.Add(newUser);
+            }
         }
         /// <summary>
         /// Function to set the visibility of labels and textboxes based on the setting parameter.
@@ -188,16 +239,6 @@ namespace InternshipApp.Login
         }
         // EVENTS //
 
-
-        /// <summary>
-        /// user updated event to refresh user list.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UserUpdated(object sender, EventArgs e)
-        {
-            FillGrid();
-        }
         /// <summary>
         /// Helper function to get permissions for a user based on the key provided.
         /// </summary>
@@ -268,6 +309,16 @@ namespace InternshipApp.Login
                 MessageBox.Show("No changes were made.");
                 return;
             }
+            if (string.IsNullOrEmpty(usernameBox.Text) || string.IsNullOrEmpty(roleBox.Text))
+            {
+                MessageBox.Show("Username and Role are required fields.");
+                return;
+            }
+            if (roleBox.Text != "Admin" || roleBox.Text != "User")
+            {
+                MessageBox.Show("Role must be either 'Admin' or 'User'.");
+                return;
+            }
             if (_userService.ChangeDetailsNoPassword(_selectedUser, _userService.GetUserName(_selectedUser), newusername, firstName, lastName, phoneNumber, address, role))
             {
                 MessageBox.Show("Details were successfully changed");
@@ -278,7 +329,8 @@ namespace InternshipApp.Login
                         _userService.setPerm(newusername, perm.Key, perm.Value, out message);
                     }
                 }
-                UserUpdated(this, EventArgs.Empty);
+                _selectedUser = _userService.GetUserByUsername(newusername);
+                UpdateUserInGrid(_selectedUser);
             }
             else
             {
@@ -318,7 +370,16 @@ namespace InternshipApp.Login
         {
             SignUp signup = new SignUp(_userService);
             signup.StartPosition = FormStartPosition.CenterScreen;
-            signup.UserUpdated += UserUpdated;
+            signup.UserUpdated += (s, args) =>
+            {
+                // Assuming your SignUp form sets a public CreatedUser field/property after successful registration
+                var createdUser = signup.CreatedUser;
+
+                if (createdUser != null)
+                {
+                    AddUserToGrid(createdUser);
+                }
+            };
             signup.ShowDialog();
         }
 
@@ -384,12 +445,10 @@ namespace InternshipApp.Login
                     return;
                 }
                 deletePopup delete = new deletePopup(_userService.GetUserName(_selectedUser), _userService);
-                delete.UserUpdated += UserUpdated;
+                delete.UserUpdated += (s, args) => RemoveUserFromGrid(user);
                 delete.StartPosition = FormStartPosition.CenterScreen;
                 delete.ShowDialog();
-                // Refresh the grid
-                FillGrid();
-                }
             }
+        }
         }
     }

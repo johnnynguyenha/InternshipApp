@@ -19,6 +19,8 @@ namespace InternshipApp
     {
         UserService _userService;
         public EventHandler UserUpdated;
+        public User CreatedUser { get; private set; }
+
 
         public SignUp(UserService userService)
         {
@@ -68,6 +70,10 @@ namespace InternshipApp
                             _userService.setPerm(username, perm.Key, perm.Value, out message);
                             UserUpdated?.Invoke(this, EventArgs.Empty); // notify user list has been updated.
                         }
+                        this.Close();
+                        message = "Register was Successful";
+                        CreatedUser = _userService.GetUserByUsername(username);
+                        UserUpdated?.Invoke(this, EventArgs.Empty);
                         this.Close();
                     }
                 }

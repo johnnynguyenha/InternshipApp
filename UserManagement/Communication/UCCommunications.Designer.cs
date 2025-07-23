@@ -39,7 +39,7 @@
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(719, 18);
+            this.startButton.Location = new System.Drawing.Point(907, 18);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(97, 23);
             this.startButton.TabIndex = 23;
@@ -50,7 +50,7 @@
             // 
             // settingsButton
             // 
-            this.settingsButton.Location = new System.Drawing.Point(721, 101);
+            this.settingsButton.Location = new System.Drawing.Point(909, 101);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(95, 23);
             this.settingsButton.TabIndex = 22;
@@ -60,7 +60,7 @@
             // 
             // disconnectButton
             // 
-            this.disconnectButton.Location = new System.Drawing.Point(721, 58);
+            this.disconnectButton.Location = new System.Drawing.Point(909, 58);
             this.disconnectButton.Name = "disconnectButton";
             this.disconnectButton.Size = new System.Drawing.Size(95, 23);
             this.disconnectButton.TabIndex = 21;
@@ -70,7 +70,7 @@
             // 
             // connectButton
             // 
-            this.connectButton.Location = new System.Drawing.Point(721, 18);
+            this.connectButton.Location = new System.Drawing.Point(909, 18);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(97, 23);
             this.connectButton.TabIndex = 20;
@@ -80,7 +80,7 @@
             // 
             // sendButton
             // 
-            this.sendButton.Location = new System.Drawing.Point(723, 401);
+            this.sendButton.Location = new System.Drawing.Point(911, 401);
             this.sendButton.Name = "sendButton";
             this.sendButton.Size = new System.Drawing.Size(95, 46);
             this.sendButton.TabIndex = 19;
@@ -92,7 +92,7 @@
             // 
             this.sendBox.Location = new System.Drawing.Point(20, 424);
             this.sendBox.Name = "sendBox";
-            this.sendBox.Size = new System.Drawing.Size(696, 22);
+            this.sendBox.Size = new System.Drawing.Size(848, 22);
             this.sendBox.TabIndex = 18;
             this.sendBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendBox_KeyPress);
             // 
@@ -102,7 +102,7 @@
             this.chatBox.Multiline = true;
             this.chatBox.Name = "chatBox";
             this.chatBox.ReadOnly = true;
-            this.chatBox.Size = new System.Drawing.Size(618, 377);
+            this.chatBox.Size = new System.Drawing.Size(845, 377);
             this.chatBox.TabIndex = 17;
             // 
             // UCCommunications
@@ -117,7 +117,7 @@
             this.Controls.Add(this.sendBox);
             this.Controls.Add(this.chatBox);
             this.Name = "UCCommunications";
-            this.Size = new System.Drawing.Size(838, 465);
+            this.Size = new System.Drawing.Size(1034, 465);
             this.Load += new System.EventHandler(this.UCCommunications_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

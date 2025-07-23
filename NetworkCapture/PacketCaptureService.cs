@@ -96,7 +96,8 @@ namespace NetworkCapture
             device.StopCapture();
         }
         /// <summary>
-        /// Event handler for when a packet arrives. Parses the packet and raises the PacketReceived event with the packet information.
+        /// Event handler for when a packet arrives. Parses the packet and raises the PacketReceived event with the packet information. 
+        /// Converting ip to DNS hostname takes time, so disable this if you want to capture packets faster.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
