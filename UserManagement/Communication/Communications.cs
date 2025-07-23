@@ -70,7 +70,6 @@ namespace InternshipApp
             settingsForm.ShowDialog();
         }
 
-        // get settings from settings form and apply them
         private void SettingsForm_SettingsApplied(object sender, SettingsAppliedEventArgs e)
         {
             if (_portService.isPortOpen())

@@ -13,6 +13,9 @@ using Utilities;
 
 namespace NetworkCapture
 {
+    /// <summary>
+    /// Packet capture service. Takes care of capturing packets from a network device and raising events with the captured packet information.
+    /// </summary>
     public class PacketEventArgs : EventArgs
     {
         public DateTime Time { get; set; }
@@ -38,6 +41,10 @@ namespace NetworkCapture
         
         }
 
+        /// <summary>
+        /// Function that gets all available capture devices on the system and returns it in a list.
+        /// </summary>
+        /// <returns></returns>
         public List<ICaptureDevice> getDevices()
         {
             var devices = CaptureDeviceList.Instance;
@@ -54,6 +61,11 @@ namespace NetworkCapture
             return result;
         }
 
+        /// <summary>
+        /// Function that begins capture on a specified device with a read timeout in milliseconds.
+        /// </summary>
+        /// <param name="deviceName"></param>
+        /// <param name="readTimeoutMilliseconds"></param>
         public void startCapture(string deviceName, int readTimeoutMilliseconds)
         {
             try
@@ -75,11 +87,19 @@ namespace NetworkCapture
             }
 
         }
-
+        /// <summary>
+        /// Function that stops the capture on the specified device.
+        /// </summary>
+        /// <param name="device"></param>
         public void stopCapture(ICaptureDevice device)
         {
             device.StopCapture();
         }
+        /// <summary>
+        /// Event handler for when a packet arrives. Parses the packet and raises the PacketReceived event with the packet information.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnPacketArrival(object sender, CaptureEventArgs e)
         {
             try
@@ -123,6 +143,12 @@ namespace NetworkCapture
                 log.Error("Error get information from packet", ex);
             }
         }
+
+        /// <summary>
+        /// Function that gets packets from the capture service based on a specified time. This is a placeholder function and should be implemented to return actual captured packets.
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
 
         public List<string> getPackets(string time)
         {

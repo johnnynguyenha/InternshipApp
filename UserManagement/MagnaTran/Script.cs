@@ -15,6 +15,9 @@ using Utilities;
 
 namespace InternshipApp
 {
+    /// <summary>
+    /// Script form for creating and running scripts.
+    /// </summary>
     public partial class Script : Form
     {
 
@@ -51,13 +54,17 @@ namespace InternshipApp
             }
         }
 
-        // return values from scriptTextBox
+        /// <summary>
+        /// Helper function to get the script text as an array of strings.
+        /// </summary>
         public Array ScriptText
         {
             get { return scriptTextBox.Lines.ToArray<string>(); }
         }
 
-        // return how many loops to do
+        /// <summary>
+        /// helper function that returns how many loops to do
+        /// </summary>
         public int LoopText
         {
             get { if (int.TryParse(loopTextBox.Text, out int amount)) { return amount; }; return 0; }
@@ -73,12 +80,16 @@ namespace InternshipApp
 
         }
 
-        // when selecting a command, populate the panels with options
+        /// <summary>
+        /// when selecting a command, populate the panels with options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void commandBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Clear old checkboxes
-            panel1.Controls.Clear();
-            panel2.Controls.Clear();
+            option1Panel.Controls.Clear();
+            option2Panel.Controls.Clear();
 
             string selectedItem = commandBox.SelectedItem.ToString();
             if (!settings.ContainsKey(selectedItem)) return;
@@ -100,7 +111,7 @@ namespace InternshipApp
                     {
                         if (cb.Checked)
                         {
-                            foreach (Control ctrl in panel1.Controls)
+                            foreach (Control ctrl in option1Panel.Controls)
                             {
                                 if (ctrl is CheckBox otherCb && otherCb != cb)
                                 {
@@ -110,7 +121,7 @@ namespace InternshipApp
                         }
                     };
 
-                    panel1.Controls.Add(cb);
+                    option1Panel.Controls.Add(cb);
                     y += 30;
                 }
             } catch (Exception ex)
@@ -132,7 +143,7 @@ namespace InternshipApp
                     {
                         if (cb2.Checked)
                         {
-                            foreach (Control ctrl in panel2.Controls)
+                            foreach (Control ctrl in option2Panel.Controls)
                             {
                                 if (ctrl is CheckBox otherCb && otherCb != cb2)
                                 {
@@ -142,7 +153,7 @@ namespace InternshipApp
                         }
                     };
 
-                    panel2.Controls.Add(cb2);
+                    option2Panel.Controls.Add(cb2);
                     y += 30;
                 }
             }catch (Exception ex)
@@ -153,7 +164,11 @@ namespace InternshipApp
             }
         }
 
-        // function to add command to the script
+        /// <summary>
+        /// Add command to script by pressing add button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
             try
@@ -164,7 +179,7 @@ namespace InternshipApp
                     return;
                 }
                 // Find the checked checkbox from panel1
-                CheckBox selectedCb1 = panel1.Controls.OfType<CheckBox>().FirstOrDefault(cb => cb.Checked);
+                CheckBox selectedCb1 = option1Panel.Controls.OfType<CheckBox>().FirstOrDefault(cb => cb.Checked);
                 if (selectedCb1 == null)
                 {
                     MessageBox.Show("Please select an option from the first group.");
@@ -195,7 +210,7 @@ namespace InternshipApp
 
                 // additional line remover logic to remove line if requirements not met
                 List<string> lines = scriptTextBox.Lines.ToList();
-                CheckBox selectedCb2 = panel2.Controls.OfType<CheckBox>().FirstOrDefault(cb => cb.Checked);
+                CheckBox selectedCb2 = option2Panel.Controls.OfType<CheckBox>().FirstOrDefault(cb => cb.Checked);
 
                 if (selectedCb2 != null)
                 {
@@ -235,7 +250,11 @@ namespace InternshipApp
 
         }
 
-        // function to save script to a txt file
+        /// <summary>
+        /// Function to save the script to a file when the save button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(scriptTextBox.Text))
@@ -263,7 +282,11 @@ namespace InternshipApp
             }
         }
 
-        // function to run current script
+        /// <summary>
+        /// Function to run the script when the run button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void runScriptButton_Click(object sender, EventArgs e)
         {
             try
@@ -293,7 +316,11 @@ namespace InternshipApp
             }
         }
 
-        // function to load script from txt file
+        /// <summary>
+        /// Function to load a script from a file when the load button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void loadScriptButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -316,9 +343,14 @@ namespace InternshipApp
             }
         }
 
+        /// <summary>
+        /// Function to toggle the edit mode of the script text box when the checkbox is checked or unchecked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (editCheckBox.Checked)
             {
                 scriptTextBox.ReadOnly = false;
             } else
@@ -327,6 +359,11 @@ namespace InternshipApp
             }
         }
 
+        /// <summary>
+        /// Function to delete the last line of the script when the delete button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteButton_Click(object sender, EventArgs e)
         {
             var lines = scriptTextBox.Lines.ToList();
@@ -348,6 +385,12 @@ namespace InternshipApp
             }
         }
 
+
+        /// <summary>
+        /// Clear button is pressed to clear the scriptbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void clearButton_Click(object sender, EventArgs e)
         {
             scriptTextBox.Text = "";

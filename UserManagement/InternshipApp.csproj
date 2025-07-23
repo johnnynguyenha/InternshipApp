@@ -174,17 +174,11 @@
     <Compile Include="Login\LoggedIn.Designer.cs">
       <DependentUpon>LoggedIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\Manage.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Login\UCManage.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Login\Manage.Designer.cs">
-      <DependentUpon>Manage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MagnaTran\MagnaTran.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MagnaTran\MagnaTran.Designer.cs">
-      <DependentUpon>MagnaTran.cs</DependentUpon>
+    <Compile Include="Login\UCManage.Designer.cs">
+      <DependentUpon>UCManage.cs</DependentUpon>
     </Compile>
     <Compile Include="MagnaTran\Script.cs">
       <SubType>Form</SubType>
@@ -192,11 +186,17 @@
     <Compile Include="MagnaTran\Script.Designer.cs">
       <DependentUpon>Script.cs</DependentUpon>
     </Compile>
-    <Compile Include="PacketCapture\PacketCapture.cs">
-      <SubType>Form</SubType>
+    <Compile Include="MagnaTran\UCMagnaTran.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PacketCapture\PacketCapture.Designer.cs">
-      <DependentUpon>PacketCapture.cs</DependentUpon>
+    <Compile Include="MagnaTran\UCMagnaTran.Designer.cs">
+      <DependentUpon>UCMagnaTran.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PacketCapture\UCPacketCapture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PacketCapture\UCPacketCapture.Designer.cs">
+      <DependentUpon>UCPacketCapture.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -236,17 +236,17 @@
     <EmbeddedResource Include="Login\LoggedIn.resx">
       <DependentUpon>LoggedIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\Manage.resx">
-      <DependentUpon>Manage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MagnaTran\MagnaTran.resx">
-      <DependentUpon>MagnaTran.cs</DependentUpon>
+    <EmbeddedResource Include="Login\UCManage.resx">
+      <DependentUpon>UCManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MagnaTran\Script.resx">
       <DependentUpon>Script.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PacketCapture\PacketCapture.resx">
-      <DependentUpon>PacketCapture.cs</DependentUpon>
+    <EmbeddedResource Include="MagnaTran\UCMagnaTran.resx">
+      <DependentUpon>UCMagnaTran.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PacketCapture\UCPacketCapture.resx">
+      <DependentUpon>UCPacketCapture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

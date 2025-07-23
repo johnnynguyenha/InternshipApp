@@ -42,10 +42,9 @@
             this.usernameBox = new System.Windows.Forms.TextBox();
             this.applyButton = new System.Windows.Forms.Button();
             this.changePasswordButton = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.settingsGroupBox = new System.Windows.Forms.GroupBox();
             this.logOutButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.settingsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // addressLabel
@@ -164,26 +163,26 @@
             this.changePasswordButton.UseVisualStyleBackColor = true;
             this.changePasswordButton.Click += new System.EventHandler(this.changePasswordButton_Click);
             // 
-            // groupBox1
+            // settingsGroupBox
             // 
-            this.groupBox1.Controls.Add(this.usernameBox);
-            this.groupBox1.Controls.Add(this.passwordBox);
-            this.groupBox1.Controls.Add(this.applyButton);
-            this.groupBox1.Controls.Add(this.firstNameBox);
-            this.groupBox1.Controls.Add(this.lastNameBox);
-            this.groupBox1.Controls.Add(this.addressLabel);
-            this.groupBox1.Controls.Add(this.phoneBox);
-            this.groupBox1.Controls.Add(this.phoneLabel);
-            this.groupBox1.Controls.Add(this.addressBox);
-            this.groupBox1.Controls.Add(this.lastNameLabel);
-            this.groupBox1.Controls.Add(this.usernameLabel);
-            this.groupBox1.Controls.Add(this.firstNameLabel);
-            this.groupBox1.Controls.Add(this.passwordLabel);
-            this.groupBox1.Location = new System.Drawing.Point(12, 29);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(465, 227);
-            this.groupBox1.TabIndex = 31;
-            this.groupBox1.TabStop = false;
+            this.settingsGroupBox.Controls.Add(this.usernameBox);
+            this.settingsGroupBox.Controls.Add(this.passwordBox);
+            this.settingsGroupBox.Controls.Add(this.applyButton);
+            this.settingsGroupBox.Controls.Add(this.firstNameBox);
+            this.settingsGroupBox.Controls.Add(this.lastNameBox);
+            this.settingsGroupBox.Controls.Add(this.addressLabel);
+            this.settingsGroupBox.Controls.Add(this.phoneBox);
+            this.settingsGroupBox.Controls.Add(this.phoneLabel);
+            this.settingsGroupBox.Controls.Add(this.addressBox);
+            this.settingsGroupBox.Controls.Add(this.lastNameLabel);
+            this.settingsGroupBox.Controls.Add(this.usernameLabel);
+            this.settingsGroupBox.Controls.Add(this.firstNameLabel);
+            this.settingsGroupBox.Controls.Add(this.passwordLabel);
+            this.settingsGroupBox.Location = new System.Drawing.Point(12, 29);
+            this.settingsGroupBox.Name = "settingsGroupBox";
+            this.settingsGroupBox.Size = new System.Drawing.Size(465, 227);
+            this.settingsGroupBox.TabIndex = 31;
+            this.settingsGroupBox.TabStop = false;
             // 
             // logOutButton
             // 
@@ -198,29 +197,18 @@
             this.logOutButton.UseVisualStyleBackColor = false;
             this.logOutButton.Click += new System.EventHandler(this.logOutButton_Click);
             // 
-            // deleteButton
-            // 
-            this.deleteButton.Location = new System.Drawing.Point(511, 147);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(96, 53);
-            this.deleteButton.TabIndex = 33;
-            this.deleteButton.Text = "Delete Account";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
-            // 
             // Details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.logOutButton);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.settingsGroupBox);
             this.Controls.Add(this.changePasswordButton);
             this.Name = "Details";
             this.Text = "Details";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.settingsGroupBox.ResumeLayout(false);
+            this.settingsGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -241,8 +229,7 @@
         private System.Windows.Forms.TextBox usernameBox;
         private System.Windows.Forms.Button applyButton;
         private System.Windows.Forms.Button changePasswordButton;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox settingsGroupBox;
         private System.Windows.Forms.Button logOutButton;
-        private System.Windows.Forms.Button deleteButton;
     }
 }

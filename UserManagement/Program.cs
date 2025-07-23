@@ -17,7 +17,7 @@ namespace InternshipApp
     internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// The main entry point for the application. Sets up the database, checks for an existing admin user, and launches the login form.
         /// </summary>
         private static readonly log4net.ILog log = LogHelper.GetLogger();
 

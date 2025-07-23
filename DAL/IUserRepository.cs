@@ -26,5 +26,11 @@ namespace DAL
         bool DeleteUser(User user);
         string GetUsername(User user);
         string GetRole(User user);
+        Dictionary<string, bool> GetPerms(User user);
+        string GetFirstName(User user);
+        string GetLastName(User user);
+        string GetPhoneNumber(User user);
+        string GetAddress(User user);
+
     }
 }

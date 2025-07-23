@@ -10,6 +10,9 @@ using Utilities;
 
 namespace SerialCommunication
 {
+    /// <summary>
+    /// TCP Service class for handling TCP connections, sending and receiving messages.
+    /// </summary>
     public class TCPServiceClient
     {
         private TcpListener _listener;
@@ -36,6 +39,10 @@ namespace SerialCommunication
 
 
         // functions
+        /// <summary>
+        /// Function to initialize the streams for reading and writing messages.
+        /// </summary>
+        /// <returns></returns>
         private async Task InitializeStreamsAsync()
         {
             var stream = _client.GetStream();
@@ -43,7 +50,11 @@ namespace SerialCommunication
             _writer = new StreamWriter(stream) { AutoFlush = true };
         }
 
-        // start the server
+        /// <summary>
+        /// Function to start the server
+        /// </summary>
+        /// <param name="port"></param>
+        /// <returns></returns>
         public async Task<bool> Start(string port)
         {
             try
@@ -71,7 +82,11 @@ namespace SerialCommunication
                 return false;
             }
         }
-
+        /// <summary>
+        /// Function to start the server with port as integer
+        /// </summary>
+        /// <param name="port"></param>
+        /// <returns></returns>
         public async Task<bool> Start(int port)
         {
             try
@@ -101,7 +116,12 @@ namespace SerialCommunication
         }
 
 
-        // connect to server asynchronously
+        /// <summary>
+        /// Function to connect to server asynchronously
+        /// </summary>
+        /// <param name="clientText"></param>
+        /// <param name="clientPortText"></param>
+        /// <returns></returns>
         public async Task<bool> ConnectServerAsync(string clientText, string clientPortText)
         {
             try
@@ -127,7 +147,12 @@ namespace SerialCommunication
 
             }
         }
-
+        /// <summary>
+        /// Function to connect to server asynchronously with port as integer
+        /// </summary>
+        /// <param name="clientText"></param>
+        /// <param name="clientPortText"></param>
+        /// <returns></returns>
         public async Task<bool> ConnectServerAsync(string clientText, int clientPortText)
         {
             try
@@ -155,7 +180,12 @@ namespace SerialCommunication
             }
         }
 
-        // connect to server non async
+        /// <summary>
+        /// Function to connect to server asynchronously with port as integer
+        /// </summary>
+        /// <param name="clientText"></param>
+        /// <param name="clientPortText"></param>
+        /// <returns></returns>
         public async Task<bool> ConnectServer(string clientText, int clientPortText)
         {
             try
@@ -182,7 +212,11 @@ namespace SerialCommunication
             }
         }
 
-        // receive messages asynchronously with ability to wait for response
+        /// <summary>
+        /// Function to receive messages asynchronously with ability to wait for response
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         private async Task ReceiveMessagesAsync(CancellationToken cancellationToken)
         {
             try
@@ -214,7 +248,11 @@ namespace SerialCommunication
             }
         }
 
-        // send message asychonously with error handling
+        /// <summary>
+        /// Function to send messages asynchronously with error handling
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task<bool> SendMessageAsync(string message)
         {
             try
@@ -234,7 +272,10 @@ namespace SerialCommunication
             return false;
         }
 
-        // return ip address
+        /// <summary>
+        /// Helper function to return ip address
+        /// </summary>
+        /// <returns></returns>
         public string returnIP()
         {
             try
@@ -253,7 +294,9 @@ namespace SerialCommunication
             return "127.0.0.1";
         }
 
-        // disconnect from server
+        /// <summary>
+        /// Function to disconnect from the server and clean up resources.
+        /// </summary>
         public void Disconnect()
         {
             _isConnected = false;

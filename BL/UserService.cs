@@ -15,7 +15,9 @@ using Utilities;
 
 namespace BL
 {
-    // class that handles the business logic and talks to the data access layer (DAL) for user management.
+    /// <summary>
+    /// Class that handles user management operations such as login, registration, password reset, and user details management. Uses the UserRepository for database operations.
+    /// </summary>
     public class UserService
     {
         private static readonly log4net.ILog log = LogHelper.GetLogger();
@@ -28,6 +30,14 @@ namespace BL
         // FUNCTIONS //
 
         // function that resets password for user. return true if successful, false otherwise.
+        /// <summary>
+        /// Function that resets the password for a user.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="newpassword"></param>
+        /// <param name="confirmpassword"></param>
+        /// <param name="message"> returns message if register is successful or not </param>
+        /// <returns></returns>
         public bool ResetPassword(string username, string newpassword, string confirmpassword, out string message)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(newpassword) || string.IsNullOrEmpty(confirmpassword))
@@ -73,11 +83,18 @@ namespace BL
                 message = "An error occurred while resetting the password";
                 return false;
             }
-            message = "Password Changed Succesfully";
+            message = "Password Changed Successfully";
             return true;
         }
 
         // function that logs in user. return true if successful, false otherwise.
+        /// <summary>
+        /// Function that logins user by verifying username and password. Returns the user object if successful, otherwise returns null and sets the message accordingly.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="message"> "Login Success" if successful.</param>
+        /// <returns></returns>
         public User Login(string username, string password, out string message)
         {
             try
@@ -118,7 +135,14 @@ namespace BL
                 return null;
             }
         }
-
+        /// <summary>
+        /// Function that registers a new user. It checks if the username already exists, if the passwords match, and then creates the user with a hashed password.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="confirmPassword"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         // function that registers a new user. return true if successful, false otherwise.
         public bool Register(string username, string password, string confirmPassword, out string message)
         {
@@ -164,6 +188,12 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Function that deletes account by username. It retrieves the user by username, checks if the user exists, and then deletes the user account.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         // function that deletes a user account. return true if successful, false otherwise.
         public bool DeleteAccount(string username)
         {
@@ -201,6 +231,11 @@ namespace BL
         }
 
         // function that gets the username of a user. return the username as a string.
+        /// <summary>
+        /// Helper function to retrieve username of a user.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public string GetUserName(User user)
         {
             try
@@ -218,7 +253,10 @@ namespace BL
             }
         }
 
-        // function that gets a userlist. returns a list of users.
+        /// <summary>
+        /// Function that retrieves the list of users.
+        /// </summary>
+        /// <returns></returns>
         public List<User> GetUserList()
         {
             try
@@ -232,7 +270,10 @@ namespace BL
             }
         }
 
-        // function that gets the userlist asynchronously. returns a list of users.
+        /// <summary>
+        /// Function that retrieves the list of users asynchronously.
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<User>> GetUserListAsync()
         {
             try
@@ -246,7 +287,11 @@ namespace BL
             }
         }
 
-        // function that gets the role of a user. returns the role as a string.
+        /// <summary>
+        /// Function that retrieves the role of a user.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public string GetRole(User user)
         {
             try
@@ -260,7 +305,19 @@ namespace BL
             }
         }
 
-        // function that changes user details. returns true if successful, false otherwise.
+        /// <summary>
+        /// Function that changes the details of a user, including username, password, first name, last name, phone number, address, and role. Returns true if successful, false otherwise.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="username"> Old Username</param>
+        /// <param name="newusername"> New Username</param>
+        /// <param name="password"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="phoneNumber"></param>
+        /// <param name="address"></param>
+        /// <param name="role"> "Admin" or "User" </param>
+        /// <returns></returns>
         public bool ChangeDetails(User user, string username, string newusername, string password, string firstName, string lastName, string phoneNumber, string address, string role)
         {
             string hashedPassword = PasswordHelper.HashPassword(password);
@@ -286,8 +343,18 @@ namespace BL
             }
         }
 
-        // function that changes user details without changing password. returns true if successful, false otherwise.
-        public bool ChangeDetailsNoPassword(User user, string username, string newusername, string firstName, string lastName, string phoneNumber, string address)
+        /// <summary>
+        /// Function that changes user details without needing a password. including username, first name, last name, phone number, address, and role. Returns true if successful, false otherwise.
+        /// <param name="user"></param>
+        /// <param name="username"> Old Username</param>
+        /// <param name="newusername"> New Username</param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="phoneNumber"></param>
+        /// <param name="address"></param>
+        /// <param name="role"> "Admin" or "User" </param>
+        /// <returns></returns>
+        public bool ChangeDetailsNoPassword(User user, string username, string newusername, string firstName, string lastName, string phoneNumber, string address, string role)
         {
             if (user == null)
             {
@@ -300,6 +367,7 @@ namespace BL
                 _unitOfWork.Users.UpdateLastName(user, lastName);
                 _unitOfWork.Users.UpdatePhoneNumber(user, phoneNumber);
                 _unitOfWork.Users.UpdateAddress(user, address);
+                _unitOfWork.Users.UpdateRole(user, role);
                 _unitOfWork.Save();
                 return true;
             }
@@ -310,7 +378,11 @@ namespace BL
             }
         }
 
-        // function that gets a user by username. returns the user object.
+        /// <summary>
+        /// Function that retrieves user by the username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public User GetUserByUsername(string username)
         {
             User user;
@@ -330,6 +402,11 @@ namespace BL
             return user;
         }
 
+        /// <summary>
+        /// Retrieves user by username asynchronously.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public async Task<User> GetUserByUsernameAsync(string username)
         {
             User user;
@@ -349,7 +426,11 @@ namespace BL
             return user;
         }
 
-        // function that sets password of user by username. 
+        /// <summary>
+        /// Sets password of user by username. It hashes the password and updates the user's password in the database. 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
 
         public void SetPassword(string username, string password)
         {
@@ -384,7 +465,12 @@ namespace BL
             }
         }
 
-        // function that gets password of user by username. returns the password as a string.
+        /// <summary>
+        /// Retrieves password of user by username, returns string password.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public string GetPassword(string username)
         {
             User user;
@@ -404,7 +490,15 @@ namespace BL
             return user.Password;
         }
 
-        // function that changes password of user. returns true if successful, false otherwise.
+        /// <summary>
+        /// Changes the password of a user by verifying the old password, checking if the new password matches the confirmation, and updating the user's password in the database. Returns true if successful, false otherwise.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="oldpassword"></param>
+        /// <param name="newpassword"></param>
+        /// <param name="confirmpassword"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public bool ChangePassword(string username, string oldpassword, string newpassword, string confirmpassword, out string message)
         {
             string hashedPassword = PasswordHelper.HashPassword(newpassword);
@@ -453,7 +547,14 @@ namespace BL
             return true;
         }
 
-        // function to change password without requiring old password (admin)
+        /// <summary>
+        /// Changes password of user without needing old password. Returns true if successful, false otherwise. Outputs string message.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="newpassword"></param>
+        /// <param name="confirmpassword"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public bool ChangePasswordNoOld(string username, string newpassword, string confirmpassword, out string message)
         {
             string hashedPassword = PasswordHelper.HashPassword(newpassword);
@@ -497,6 +598,14 @@ namespace BL
             return true;
         }
 
+        /// <summary>
+        /// Sets Permission of User by username. Returns true is successful, false otherwise. Outputs string message.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="perm"> String name of the permission to be changed. "Communications", "Network", "Manage", "MagnaTran" ,"Details" </param>
+        /// <param name="value"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public bool setPerm(string username, string perm, bool value, out string message)
         {
             User user;
@@ -516,8 +625,134 @@ namespace BL
                 return false;
             }
             _unitOfWork.Users.UpdatePerm(user, perm, value);
+            _unitOfWork.Save();
             message = "Permission changed successfully.";
             return true;
+        }
+
+        /// <summary>
+        /// Retrieves permissions of a user by username. Returns a dictionary of permissions with their boolean values and outputs a message.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public Dictionary<string, bool> getPerms(string username, out string message)
+        {
+            User user;
+            try
+            {
+                user = _unitOfWork.Users.GetUserByUsername(username);
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Exception in retrieving User {username} when GetPerm.", ex);
+                message = "An error occurred when trying to get the user's permissions";
+                return null;
+            }
+            if (user == null)
+            {
+                message = "User not found";
+                return null;
+            }
+            message = "Permissions Retrieved";
+            return _unitOfWork.Users.GetPerms(user);
+        }
+        /// <summary>
+        /// Retrieves the first name of a user by username. Returns the first name as a string or null if the user is not found or an error occurs.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetFirstName(string username)
+        {
+            User user;
+            try
+            {
+                user = _unitOfWork.Users.GetUserByUsername(username);
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Exception in retrieving User {username} when GetFirstName.", ex);
+                return null;
+            }
+            if (user == null)
+            {
+                log.Error("Cannot find User. User not found");
+                return null;
+            }
+            return _unitOfWork.Users.GetFirstName(user);
+        }
+        /// <summary>
+        /// Retrieves the last name of a user by username. Returns the last name as a string or null if the user is not found or an error occurs.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetLastName(string username)
+        {
+            User user;
+            try
+            {
+                user = _unitOfWork.Users.GetUserByUsername(username);
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Exception in retrieving User {username} when GetLastName.", ex);
+                return null;
+            }
+            if (user == null)
+            {
+                log.Error("Cannot find User. User not found");
+                return null;
+            }
+            return _unitOfWork.Users.GetLastName(user);
+        }
+
+        /// <summary>
+        /// Retrieves the address of a user by username. Returns the address as a string or null if the user is not found or an error occurs.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetAddress(string username)
+        {
+            User user;
+            try
+            {
+                user = _unitOfWork.Users.GetUserByUsername(username);
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Exception in retrieving User {username} when GetAddress.", ex);
+                return null;
+            }
+            if (user == null)
+            {
+                log.Error("Cannot find User. User not found");
+                return null;
+            }
+            return _unitOfWork.Users.GetAddress(user);
+        }
+        /// <summary>
+        /// Retrieves the phone number of a user by username. Returns the phone number as a string or null if the user is not found or an error occurs.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetPhoneNumber(string username)
+        {
+            User user;
+            try
+            {
+                user = _unitOfWork.Users.GetUserByUsername(username);
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Exception in retrieving User {username} when GetPhoneNumber.", ex);
+                return null;
+            }
+            if (user == null)
+            {
+                log.Error("Cannot find User. User not found");
+                return null;
+            }
+            return _unitOfWork.Users.GetPhoneNumber(user);
         }
     }
 }

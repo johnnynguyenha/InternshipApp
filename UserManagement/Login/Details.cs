@@ -13,7 +13,9 @@ using Model;
 namespace InternshipApp
 {
 
-    // popup for showing user details (user must be logged in). also allows for user to go to change password form.
+    /// <summary>
+    /// Popup to show user details and allow editing of them.
+    /// </summary>
     public partial class Details : Form
     {
         UserService _userService;
@@ -38,7 +40,9 @@ namespace InternshipApp
 
         // FUNCTIONS //
 
-        // fills the text boxes with user details of the User. if there's an error, show message box.
+        /// <summary>
+        /// Fills textbox with user details.
+        /// </summary>
         private void fillDetails()
         {
             var user = _user;
@@ -57,7 +61,10 @@ namespace InternshipApp
             }
         }
 
-        // enable or disable if user can edit boxes.
+       /// <summary>
+       /// Function to disable or enable boxes for editing.
+       /// </summary>
+       /// <param name="setting"></param>
 
         private void enableBoxes(bool setting)
         {
@@ -71,14 +78,34 @@ namespace InternshipApp
 
         // EVENTS //
 
-        // user presses edit button to enable text boxes for editing.
+        /// <summary>
+        ///  User presses edit button to enable the boxes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void editButton_Click(object sender, EventArgs e)
         {
             enableBoxes(true);
         }
 
-        // user presses apply to save details. if successful, show message box. if not, show error message.
+        /// <summary>
+        /// Function to check permissions of user. (used in future if developer wants to add permissions to user details form)
+        /// </summary>
+        /// <param name="perms"></param>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        private static bool HasPerm(Dictionary<string, bool> perms, string key, bool defaultValue = false)
+        {
+            if (perms == null) return defaultValue;
+            return perms.TryGetValue(key, out bool allowed) ? allowed : defaultValue;
+        }
+        /// <summary>
+        /// User presses apply button to save changes. If successful, display message and close form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void applyButton_Click(object sender, EventArgs e)
         {
             if (usernameBox.Text == string.Empty)
@@ -91,7 +118,19 @@ namespace InternshipApp
             string lastName = lastNameBox.Text;
             string phoneNumber = phoneBox.Text;
             string address = addressBox.Text;
-            if (_userService.ChangeDetailsNoPassword(_user, _username, newusername, firstName, lastName, phoneNumber, address))
+            string role = _userService.GetRole(_user);
+            if (
+                (newusername ?? "").Trim() == (_userService.GetUserName(_user) ?? "").Trim() &&
+                (firstName ?? "").Trim() == (_userService.GetFirstName(_username) ?? "").Trim() &&
+                (lastName ?? "").Trim() == (_userService.GetLastName(_username) ?? "").Trim() &&
+                (phoneNumber ?? "").Trim() == (_userService.GetPhoneNumber(_username) ?? "").Trim() &&
+                (address ?? "").Trim() == (_userService.GetAddress(_username) ?? "").Trim()
+            )
+            {
+                MessageBox.Show("No changes were made.");
+                return;
+            }
+            if (_userService.ChangeDetailsNoPassword(_user, _username, newusername, firstName, lastName, phoneNumber, address, role))
             {
                 MessageBox.Show("Details were successfully changed");
                 _username = newusername;
@@ -104,7 +143,11 @@ namespace InternshipApp
             fillDetails();
         }
 
-        // user presses change password button, show change password form.
+        /// <summary>
+        /// User presses change password button to open change password form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void changePasswordButton_Click(object sender, EventArgs e)
         {
             ChangePassword changePassword = new ChangePassword(_userService, _user);
@@ -112,6 +155,11 @@ namespace InternshipApp
             changePassword.ShowDialog();
         }
 
+        /// <summary>
+        /// User presses logout button. Closes form and returns to login screen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void logOutButton_Click(object sender, EventArgs e)
         {
             _mainmenu.Dispose();
@@ -120,6 +168,11 @@ namespace InternshipApp
             
         }
 
+        /// <summary>
+        /// User presses delete button to delete their account. If user is an admin, display message that they cannot delete their own account.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteButton_Click(object sender, EventArgs e)
         {
             if (_userService.GetRole(_user) == "Admin")

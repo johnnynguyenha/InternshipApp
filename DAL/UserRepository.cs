@@ -102,6 +102,14 @@ namespace DAL
             }
             _user.Role = role;
         }
+        /// <summary>
+        /// Updates a specific permission for a user.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="perm"> permission to be updated. "Communications", "Network, "MagnaTran", "Manage", "Details"</param>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public void UpdatePerm(User user, string perm, bool value)
         {
             if (user == null)
@@ -114,7 +122,7 @@ namespace DAL
             }
             switch (perm.ToLower())
             {
-                case "communication":
+                case "communications":
                     user.commPerm = value;
                     break;
                 case "network":
@@ -133,6 +141,13 @@ namespace DAL
                     throw new ArgumentException("Invalid permission type", nameof(perm));
             }
         }
+        /// <summary>
+        /// Creates user with default full permissions. Mainly used to create admin user, then set perms afterwards.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="role"> "Admin" or "User"</param>
+        /// <returns></returns>
         public bool CreateUser(string username, string password, string role)
         {
             var newUser = new User()
@@ -173,6 +188,60 @@ namespace DAL
                 throw new ArgumentNullException(nameof(user), "User cannot be null");
             }
             return user.Role;
+        }
+        /// <summary>
+        /// Returns dictionary of User perms.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public Dictionary<string, bool> GetPerms(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null");
+            }
+            Dictionary<string, bool> perms = new Dictionary<string, bool>
+            {
+                { "Communications", user.commPerm },
+                { "Network", user.networkPerm },
+                { "MagnaTran", user.magnaPerm },
+                { "Manage", user.managePerm },
+                { "Details", user.detailsPerm }
+            };
+            return perms;
+        }
+        public string GetFirstName(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null");
+            }
+            return user.FirstName;
+        }
+        public string GetLastName(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null");
+            }
+            return user.LastName;
+        }
+        public string GetAddress(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null");
+            }
+            return user.Address;
+        }
+        public string GetPhoneNumber(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User canno tbe null");
+            }
+            return user.PhoneNumber;
         }
     }
 }

@@ -115,7 +115,7 @@
             // 
             this.permissionCheckBox.FormattingEnabled = true;
             this.permissionCheckBox.Items.AddRange(new object[] {
-            "Communication",
+            "Communications",
             "Network",
             "MagnaTran",
             "Details",

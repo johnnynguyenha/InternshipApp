@@ -7,6 +7,9 @@ using BCrypt.Net;
 
 namespace Utilities
 {
+    /// <summary>
+    /// Password helper class to hash passwords using BCrypt and verify them.
+    /// </summary>
     public static class PasswordHelper
     {
         public static string HashPassword(string password)

@@ -13,7 +13,9 @@ using Model;
 namespace InternshipApp
 {
 
-    // form for confirming deleting account (user is logged in or not).
+    /// <summary>
+    /// Form to delete and confirm deletion of user account. 
+    /// </summary>
     public partial class deletePopup : Form
     {
         string _username;
@@ -22,7 +24,12 @@ namespace InternshipApp
         public EventHandler UserUpdated;
         User _user;
 
-        // constructor for if user is logged in (delete account from logged in menu).
+        /// <summary>
+        /// Constructor for if user is logged in.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="loggedin"></param>
+        /// <param name="userService"></param>
         public deletePopup(User user, Form loggedin, UserService userService)
         {
             InitializeComponent();
@@ -32,7 +39,11 @@ namespace InternshipApp
             _userService = userService;
         }
 
-        // overloaded constructor for if user is not logged in (delete account from different menu).
+        /// <summary>
+        /// Constructor for if user is not logged in.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="userService"></param>
         public deletePopup(string username, UserService userService)
         {
             InitializeComponent();
@@ -45,14 +56,22 @@ namespace InternshipApp
 
         // EVENTS //
 
-        // closes popup if user presses no
+        /// <summary>
+        /// If user presses no, close popup.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void noButton_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
 
 
-        // user presses yes to delete account. if account is deleted, log out. if not, display error message.
+        /// <summary>
+        /// User presses yes to delete account. If successful, display message and close popup.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void yesButton_Click(object sender, EventArgs e)
         {
             if (_userService.DeleteAccount(_username))

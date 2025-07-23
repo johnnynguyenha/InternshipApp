@@ -12,7 +12,7 @@ namespace Model
     public class User
     {
             [Key]
-            public int UserId { get; set; } // assumed as the primary key because has the name of the class + id in it
+            public int UserId { get; set; } 
             [Required]
             [MaxLength(100)]
             public string UserName { get; set; }

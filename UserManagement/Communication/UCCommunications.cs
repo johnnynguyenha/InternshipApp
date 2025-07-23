@@ -17,6 +17,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace InternshipApp.Communication
 {
+
     public partial class UCCommunications : UserControl
     {
         private string _comPortName;
@@ -51,6 +52,9 @@ namespace InternshipApp.Communication
             disconnectButton.Enabled = false;
 
         }
+        /// <summary>
+        /// Function that opens the settings form.
+        /// </summary>
         private void OpenSettingsForm()
         {
             var settingsForm = new CommSettings(_portService, _tcpServiceClient);
@@ -60,7 +64,7 @@ namespace InternshipApp.Communication
                 if (settingsForm.DialogResult == DialogResult.Cancel)
                 {
                     _usingCom = false; // reset usingCom to false
-                    connectButton.Visible = false;
+                    connectButton.Enabled = false;
                     startButton.Visible = false;
                 }
             };
@@ -68,7 +72,11 @@ namespace InternshipApp.Communication
             settingsForm.ShowDialog();
         }
 
-        // get settings from settings form and apply them
+        /// <summary>
+        /// Event handler for when settings are applied from the settings form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SettingsForm_SettingsApplied(object sender, SettingsAppliedEventArgs e)
         {
             if (_portService.isPortOpen())
@@ -127,6 +135,9 @@ namespace InternshipApp.Communication
                 return;
             }
         }
+        /// <summary>
+        ///  Helper function to initialize the TCP service client.
+        /// </summary>
         private void initializeTCPService()
         {
             _tcpServiceClient = new TCPServiceClient();
@@ -136,7 +147,10 @@ namespace InternshipApp.Communication
             _tcpServiceClient.ErrorOccurred += OnErrorOccurred;
         }
 
-        // message receive from TCP
+        /// <summary>
+        /// Message Received event handler for TCP communication.
+        /// </summary>
+        /// <param name="message"></param>
         private void OnMessageReceived(string message)
         {
             if (InvokeRequired)
@@ -151,7 +165,10 @@ namespace InternshipApp.Communication
                 _responseTimeoutTokenSource?.Cancel();
             }
         }
-        // error on tcp
+        /// <summary>
+        /// Error occurred event handler for TCP communication.
+        /// </summary>
+        /// <param name="error"></param>
         private void OnErrorOccurred(string error)
         {
             if (InvokeRequired)
@@ -162,7 +179,9 @@ namespace InternshipApp.Communication
 
             MessageBox.Show($"Error: {error}");
         }
-        // client connect tcp
+        /// <summary>
+        /// Event handler for when a client connects to the TCP server.
+        /// </summary>
         private void OnClientConnected()
         {
             if (InvokeRequired)
@@ -173,7 +192,9 @@ namespace InternshipApp.Communication
 
             chatBox.AppendText("Client connected!\r\n");
         }
-        // client disconnect tcp
+        /// <summary>
+        /// Event Handler for when a client disconnects from the TCP server.
+        /// </summary>
         private void OnClientDisconnected()
         {
             if (InvokeRequired)
@@ -184,7 +205,10 @@ namespace InternshipApp.Communication
             chatBox.AppendText("Client disconnected!\r\n");
         }
 
-        // wait for response tcp
+        /// <summary>
+        /// Function that waits for a message response from the device. 
+        /// </summary>
+        /// <returns></returns>
         private async Task WaitMessageAsync()
         {
             _waitingForResponse = true;
@@ -212,7 +236,9 @@ namespace InternshipApp.Communication
             }
         }
 
-        // tcp send message function
+        /// <summary>
+        /// TCP send message function. Sends a message to the TCP server.
+        /// </summary>
         private async void TcpSendMessage()
         {
             if (string.IsNullOrEmpty(sendBox.Text))
@@ -242,8 +268,12 @@ namespace InternshipApp.Communication
             }
         }
 
- 
-        // receive data using com
+
+        /// <summary>
+        /// Event handler for data received from the serial port.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
@@ -288,7 +318,9 @@ namespace InternshipApp.Communication
         }
 
 
-        // send message using com
+        /// <summary>
+        /// Function to send a message using SerialRs232 communication.
+        /// </summary>
         private void ComSendMessage()
         {
             if (_portService.isPortOpen())
@@ -312,7 +344,11 @@ namespace InternshipApp.Communication
             }
         }
 
-        // start tcp server
+        /// <summary>
+        /// Start button, used for starting the TCP server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void startButton_Click_1(object sender, EventArgs e)
         {
             try
@@ -341,6 +377,11 @@ namespace InternshipApp.Communication
             }
         }
 
+        /// <summary>
+        /// Connect button, used to connect to the COM port or TCP server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void connectButton_Click_1(object sender, EventArgs e)
         {
             {
@@ -405,6 +446,11 @@ namespace InternshipApp.Communication
             }
         }
 
+        /// <summary>
+        /// Disconnect button, used to disconnect from the COM port or TCP server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void disconnectButton_Click_1(object sender, EventArgs e)
         {
             {
@@ -436,11 +482,21 @@ namespace InternshipApp.Communication
             }
         }
 
+        /// <summary>
+        /// Settings button to open the settings form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void settingsButton_Click_1(object sender, EventArgs e)
         {
             OpenSettingsForm();
         }
 
+        /// <summary>
+        /// Send button for sending message using com or tcp
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sendButton_Click_1(object sender, EventArgs e)
         {
             {
@@ -455,6 +511,11 @@ namespace InternshipApp.Communication
             }
         }
 
+        /// <summary>
+        /// Alternative to send button using enter key. Sends message when enter key is pressed in the send box.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sendBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -470,8 +531,14 @@ namespace InternshipApp.Communication
             }
         }
 
+        /// <summary>
+        /// Load user control.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCCommunications_Load(object sender, EventArgs e)
         {
+            this.Dock = DockStyle.Fill;
             OpenSettingsForm();
         }
     }
