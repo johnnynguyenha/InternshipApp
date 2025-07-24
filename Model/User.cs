@@ -12,7 +12,7 @@ namespace Model
     public class User
     {
             [Key]
-            public int UserId { get; set; } // assumed as the primary key because has the name of the class + id in it
+            public int UserId { get; set; } 
             [Required]
             [MaxLength(100)]
             public string UserName { get; set; }
@@ -25,6 +25,15 @@ namespace Model
             public string LastName { get; set; }
             public string PhoneNumber { get; set; }
             public string Address { get; set; }
-
-        }
+            [Required]
+            public bool commPerm { get; set; }
+            [Required]
+            public bool networkPerm { get; set; }
+            [Required]
+            public bool detailsPerm { get; set; }
+            [Required]
+            public bool magnaPerm { get; set; }
+            [Required]
+            public bool managePerm { get; set; }
     }
+}

@@ -30,27 +30,27 @@
         {
             this.connectionTab = new System.Windows.Forms.TabControl();
             this.comPage = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comPortGroupBox = new System.Windows.Forms.GroupBox();
             this.rtsCheckBox = new System.Windows.Forms.CheckBox();
             this.dtrCheckBox = new System.Windows.Forms.CheckBox();
             this.comPortCBox = new System.Windows.Forms.ComboBox();
             this.parityBitsCBox = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.parityBitsLabel = new System.Windows.Forms.Label();
             this.stopBitsCBox = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.stopBitsLabel = new System.Windows.Forms.Label();
             this.dataBitsCBox = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.dataBitsLabel = new System.Windows.Forms.Label();
             this.baudRateCBox = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.baudRateLabel = new System.Windows.Forms.Label();
+            this.comPortLabel = new System.Windows.Forms.Label();
             this.tcpPage = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tcpServerGroupBox = new System.Windows.Forms.GroupBox();
             this.serverIPBox = new System.Windows.Forms.TextBox();
             this.serverPortLabel = new System.Windows.Forms.Label();
             this.serverIPLabel = new System.Windows.Forms.Label();
             this.portBox = new System.Windows.Forms.TextBox();
             this.tcpclientPage = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tcpClientGroupBox = new System.Windows.Forms.GroupBox();
             this.clientPortLabel = new System.Windows.Forms.Label();
             this.clientIPLabel = new System.Windows.Forms.Label();
             this.clientIPBox = new System.Windows.Forms.TextBox();
@@ -58,11 +58,11 @@
             this.applyButton = new System.Windows.Forms.Button();
             this.connectionTab.SuspendLayout();
             this.comPage.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.comPortGroupBox.SuspendLayout();
             this.tcpPage.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.tcpServerGroupBox.SuspendLayout();
             this.tcpclientPage.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.tcpClientGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // connectionTab
@@ -78,7 +78,7 @@
             // 
             // comPage
             // 
-            this.comPage.Controls.Add(this.groupBox1);
+            this.comPage.Controls.Add(this.comPortGroupBox);
             this.comPage.Location = new System.Drawing.Point(4, 25);
             this.comPage.Name = "comPage";
             this.comPage.Padding = new System.Windows.Forms.Padding(3);
@@ -87,26 +87,26 @@
             this.comPage.Text = "COM";
             this.comPage.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // comPortGroupBox
             // 
-            this.groupBox1.Controls.Add(this.rtsCheckBox);
-            this.groupBox1.Controls.Add(this.dtrCheckBox);
-            this.groupBox1.Controls.Add(this.comPortCBox);
-            this.groupBox1.Controls.Add(this.parityBitsCBox);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.stopBitsCBox);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.dataBitsCBox);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.baudRateCBox);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(6, 39);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(366, 197);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Com Port Control";
+            this.comPortGroupBox.Controls.Add(this.rtsCheckBox);
+            this.comPortGroupBox.Controls.Add(this.dtrCheckBox);
+            this.comPortGroupBox.Controls.Add(this.comPortCBox);
+            this.comPortGroupBox.Controls.Add(this.parityBitsCBox);
+            this.comPortGroupBox.Controls.Add(this.parityBitsLabel);
+            this.comPortGroupBox.Controls.Add(this.stopBitsCBox);
+            this.comPortGroupBox.Controls.Add(this.stopBitsLabel);
+            this.comPortGroupBox.Controls.Add(this.dataBitsCBox);
+            this.comPortGroupBox.Controls.Add(this.dataBitsLabel);
+            this.comPortGroupBox.Controls.Add(this.baudRateCBox);
+            this.comPortGroupBox.Controls.Add(this.baudRateLabel);
+            this.comPortGroupBox.Controls.Add(this.comPortLabel);
+            this.comPortGroupBox.Location = new System.Drawing.Point(6, 39);
+            this.comPortGroupBox.Name = "comPortGroupBox";
+            this.comPortGroupBox.Size = new System.Drawing.Size(366, 197);
+            this.comPortGroupBox.TabIndex = 1;
+            this.comPortGroupBox.TabStop = false;
+            this.comPortGroupBox.Text = "Com Port Control";
             // 
             // rtsCheckBox
             // 
@@ -149,14 +149,14 @@
             this.parityBitsCBox.TabIndex = 7;
             this.parityBitsCBox.Text = "None";
             // 
-            // label5
+            // parityBitsLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 144);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 16);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "PARITY BITS";
+            this.parityBitsLabel.AutoSize = true;
+            this.parityBitsLabel.Location = new System.Drawing.Point(10, 144);
+            this.parityBitsLabel.Name = "parityBitsLabel";
+            this.parityBitsLabel.Size = new System.Drawing.Size(89, 16);
+            this.parityBitsLabel.TabIndex = 8;
+            this.parityBitsLabel.Text = "PARITY BITS";
             // 
             // stopBitsCBox
             // 
@@ -170,14 +170,14 @@
             this.stopBitsCBox.TabIndex = 5;
             this.stopBitsCBox.Text = "One";
             // 
-            // label4
+            // stopBitsLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 114);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 16);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "STOP BITS";
+            this.stopBitsLabel.AutoSize = true;
+            this.stopBitsLabel.Location = new System.Drawing.Point(10, 114);
+            this.stopBitsLabel.Name = "stopBitsLabel";
+            this.stopBitsLabel.Size = new System.Drawing.Size(77, 16);
+            this.stopBitsLabel.TabIndex = 6;
+            this.stopBitsLabel.Text = "STOP BITS";
             // 
             // dataBitsCBox
             // 
@@ -192,14 +192,14 @@
             this.dataBitsCBox.TabIndex = 3;
             this.dataBitsCBox.Text = "8";
             // 
-            // label3
+            // dataBitsLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 84);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 16);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "DATA BITS";
+            this.dataBitsLabel.AutoSize = true;
+            this.dataBitsLabel.Location = new System.Drawing.Point(10, 84);
+            this.dataBitsLabel.Name = "dataBitsLabel";
+            this.dataBitsLabel.Size = new System.Drawing.Size(77, 16);
+            this.dataBitsLabel.TabIndex = 4;
+            this.dataBitsLabel.Text = "DATA BITS";
             // 
             // baudRateCBox
             // 
@@ -214,27 +214,27 @@
             this.baudRateCBox.TabIndex = 1;
             this.baudRateCBox.Text = "9600";
             // 
-            // label2
+            // baudRateLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 54);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 16);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "BAUD RATE";
+            this.baudRateLabel.AutoSize = true;
+            this.baudRateLabel.Location = new System.Drawing.Point(10, 54);
+            this.baudRateLabel.Name = "baudRateLabel";
+            this.baudRateLabel.Size = new System.Drawing.Size(85, 16);
+            this.baudRateLabel.TabIndex = 2;
+            this.baudRateLabel.Text = "BAUD RATE";
             // 
-            // label1
+            // comPortLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "COM PORT";
+            this.comPortLabel.AutoSize = true;
+            this.comPortLabel.Location = new System.Drawing.Point(10, 24);
+            this.comPortLabel.Name = "comPortLabel";
+            this.comPortLabel.Size = new System.Drawing.Size(78, 16);
+            this.comPortLabel.TabIndex = 0;
+            this.comPortLabel.Text = "COM PORT";
             // 
             // tcpPage
             // 
-            this.tcpPage.Controls.Add(this.groupBox3);
+            this.tcpPage.Controls.Add(this.tcpServerGroupBox);
             this.tcpPage.Location = new System.Drawing.Point(4, 25);
             this.tcpPage.Name = "tcpPage";
             this.tcpPage.Padding = new System.Windows.Forms.Padding(3);
@@ -243,18 +243,18 @@
             this.tcpPage.Text = "TCP/IP Server";
             this.tcpPage.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // tcpServerGroupBox
             // 
-            this.groupBox3.Controls.Add(this.serverIPBox);
-            this.groupBox3.Controls.Add(this.serverPortLabel);
-            this.groupBox3.Controls.Add(this.serverIPLabel);
-            this.groupBox3.Controls.Add(this.portBox);
-            this.groupBox3.Location = new System.Drawing.Point(6, 6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(376, 186);
-            this.groupBox3.TabIndex = 7;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Server";
+            this.tcpServerGroupBox.Controls.Add(this.serverIPBox);
+            this.tcpServerGroupBox.Controls.Add(this.serverPortLabel);
+            this.tcpServerGroupBox.Controls.Add(this.serverIPLabel);
+            this.tcpServerGroupBox.Controls.Add(this.portBox);
+            this.tcpServerGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.tcpServerGroupBox.Name = "tcpServerGroupBox";
+            this.tcpServerGroupBox.Size = new System.Drawing.Size(376, 186);
+            this.tcpServerGroupBox.TabIndex = 7;
+            this.tcpServerGroupBox.TabStop = false;
+            this.tcpServerGroupBox.Text = "Server";
             // 
             // serverIPBox
             // 
@@ -290,7 +290,7 @@
             // 
             // tcpclientPage
             // 
-            this.tcpclientPage.Controls.Add(this.groupBox2);
+            this.tcpclientPage.Controls.Add(this.tcpClientGroupBox);
             this.tcpclientPage.Location = new System.Drawing.Point(4, 25);
             this.tcpclientPage.Name = "tcpclientPage";
             this.tcpclientPage.Padding = new System.Windows.Forms.Padding(3);
@@ -299,18 +299,18 @@
             this.tcpclientPage.Text = "TCP/IP Client";
             this.tcpclientPage.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // tcpClientGroupBox
             // 
-            this.groupBox2.Controls.Add(this.clientPortLabel);
-            this.groupBox2.Controls.Add(this.clientIPLabel);
-            this.groupBox2.Controls.Add(this.clientIPBox);
-            this.groupBox2.Controls.Add(this.clientPortBox);
-            this.groupBox2.Location = new System.Drawing.Point(17, 16);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(352, 167);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Client";
+            this.tcpClientGroupBox.Controls.Add(this.clientPortLabel);
+            this.tcpClientGroupBox.Controls.Add(this.clientIPLabel);
+            this.tcpClientGroupBox.Controls.Add(this.clientIPBox);
+            this.tcpClientGroupBox.Controls.Add(this.clientPortBox);
+            this.tcpClientGroupBox.Location = new System.Drawing.Point(17, 16);
+            this.tcpClientGroupBox.Name = "tcpClientGroupBox";
+            this.tcpClientGroupBox.Size = new System.Drawing.Size(352, 167);
+            this.tcpClientGroupBox.TabIndex = 8;
+            this.tcpClientGroupBox.TabStop = false;
+            this.tcpClientGroupBox.Text = "Client";
             // 
             // clientPortLabel
             // 
@@ -368,14 +368,14 @@
             this.Load += new System.EventHandler(this.CommSettings_Load);
             this.connectionTab.ResumeLayout(false);
             this.comPage.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.comPortGroupBox.ResumeLayout(false);
+            this.comPortGroupBox.PerformLayout();
             this.tcpPage.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.tcpServerGroupBox.ResumeLayout(false);
+            this.tcpServerGroupBox.PerformLayout();
             this.tcpclientPage.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.tcpClientGroupBox.ResumeLayout(false);
+            this.tcpClientGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -385,24 +385,24 @@
         private System.Windows.Forms.TabControl connectionTab;
         private System.Windows.Forms.TabPage comPage;
         private System.Windows.Forms.TabPage tcpPage;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox comPortGroupBox;
         private System.Windows.Forms.ComboBox comPortCBox;
         private System.Windows.Forms.ComboBox parityBitsCBox;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label parityBitsLabel;
         private System.Windows.Forms.ComboBox stopBitsCBox;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label stopBitsLabel;
         private System.Windows.Forms.ComboBox dataBitsCBox;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label dataBitsLabel;
         private System.Windows.Forms.ComboBox baudRateCBox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label baudRateLabel;
+        private System.Windows.Forms.Label comPortLabel;
         private System.Windows.Forms.Button applyButton;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox tcpClientGroupBox;
         private System.Windows.Forms.Label clientPortLabel;
         private System.Windows.Forms.Label clientIPLabel;
         private System.Windows.Forms.TextBox clientIPBox;
         private System.Windows.Forms.TextBox clientPortBox;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox tcpServerGroupBox;
         private System.Windows.Forms.TextBox serverIPBox;
         private System.Windows.Forms.Label serverPortLabel;
         private System.Windows.Forms.Label serverIPLabel;

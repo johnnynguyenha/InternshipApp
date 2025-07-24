@@ -31,22 +31,22 @@
             this.addButton = new System.Windows.Forms.Button();
             this.loopLabel = new System.Windows.Forms.Label();
             this.loopTextBox = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.scriptGroupBox = new System.Windows.Forms.GroupBox();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.editCheckBox = new System.Windows.Forms.CheckBox();
             this.scriptTextBox = new System.Windows.Forms.TextBox();
             this.commandBox = new System.Windows.Forms.ComboBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.optionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.amount2TextBox = new System.Windows.Forms.TextBox();
             this.amountTextBox = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.option2Panel = new System.Windows.Forms.Panel();
+            this.option1Panel = new System.Windows.Forms.Panel();
             this.saveButton = new System.Windows.Forms.Button();
             this.runScriptButton = new System.Windows.Forms.Button();
             this.loadScriptButton = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.scriptGroupBox.SuspendLayout();
+            this.optionsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // addButton
@@ -76,17 +76,39 @@
             this.loopTextBox.TabIndex = 3;
             this.loopTextBox.Text = "1";
             // 
-            // groupBox1
+            // scriptGroupBox
             // 
-            this.groupBox1.Controls.Add(this.clearButton);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.scriptTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(330, 30);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(301, 385);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Script";
+            this.scriptGroupBox.Controls.Add(this.clearButton);
+            this.scriptGroupBox.Controls.Add(this.editCheckBox);
+            this.scriptGroupBox.Controls.Add(this.scriptTextBox);
+            this.scriptGroupBox.Location = new System.Drawing.Point(330, 30);
+            this.scriptGroupBox.Name = "scriptGroupBox";
+            this.scriptGroupBox.Size = new System.Drawing.Size(301, 385);
+            this.scriptGroupBox.TabIndex = 4;
+            this.scriptGroupBox.TabStop = false;
+            this.scriptGroupBox.Text = "Script";
+            // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(203, 349);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.clearButton.Size = new System.Drawing.Size(92, 30);
+            this.clearButton.TabIndex = 10;
+            this.clearButton.Text = "Clear Script";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
+            // editCheckBox
+            // 
+            this.editCheckBox.AutoSize = true;
+            this.editCheckBox.Location = new System.Drawing.Point(7, 316);
+            this.editCheckBox.Name = "editCheckBox";
+            this.editCheckBox.Size = new System.Drawing.Size(89, 20);
+            this.editCheckBox.TabIndex = 1;
+            this.editCheckBox.Text = "Edit Script";
+            this.editCheckBox.UseVisualStyleBackColor = true;
+            this.editCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // scriptTextBox
             // 
@@ -106,22 +128,32 @@
             this.commandBox.TabIndex = 5;
             this.commandBox.SelectedIndexChanged += new System.EventHandler(this.commandBox_SelectedIndexChanged);
             // 
-            // groupBox2
+            // optionsGroupBox
             // 
-            this.groupBox2.Controls.Add(this.deleteButton);
-            this.groupBox2.Controls.Add(this.amount2TextBox);
-            this.groupBox2.Controls.Add(this.addButton);
-            this.groupBox2.Controls.Add(this.amountTextBox);
-            this.groupBox2.Controls.Add(this.panel2);
-            this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Controls.Add(this.commandBox);
-            this.groupBox2.Location = new System.Drawing.Point(12, 30);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(291, 347);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Options";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            this.optionsGroupBox.Controls.Add(this.deleteButton);
+            this.optionsGroupBox.Controls.Add(this.amount2TextBox);
+            this.optionsGroupBox.Controls.Add(this.addButton);
+            this.optionsGroupBox.Controls.Add(this.amountTextBox);
+            this.optionsGroupBox.Controls.Add(this.option2Panel);
+            this.optionsGroupBox.Controls.Add(this.option1Panel);
+            this.optionsGroupBox.Controls.Add(this.commandBox);
+            this.optionsGroupBox.Location = new System.Drawing.Point(12, 30);
+            this.optionsGroupBox.Name = "optionsGroupBox";
+            this.optionsGroupBox.Size = new System.Drawing.Size(291, 347);
+            this.optionsGroupBox.TabIndex = 6;
+            this.optionsGroupBox.TabStop = false;
+            this.optionsGroupBox.Text = "Options";
+            this.optionsGroupBox.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(149, 306);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(92, 30);
+            this.deleteButton.TabIndex = 9;
+            this.deleteButton.Text = "Delete Line";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // amount2TextBox
             // 
@@ -137,19 +169,19 @@
             this.amountTextBox.Size = new System.Drawing.Size(104, 22);
             this.amountTextBox.TabIndex = 0;
             // 
-            // panel2
+            // option2Panel
             // 
-            this.panel2.Location = new System.Drawing.Point(149, 85);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(137, 179);
-            this.panel2.TabIndex = 7;
+            this.option2Panel.Location = new System.Drawing.Point(149, 85);
+            this.option2Panel.Name = "option2Panel";
+            this.option2Panel.Size = new System.Drawing.Size(137, 179);
+            this.option2Panel.TabIndex = 7;
             // 
-            // panel1
+            // option1Panel
             // 
-            this.panel1.Location = new System.Drawing.Point(6, 85);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(137, 179);
-            this.panel1.TabIndex = 6;
+            this.option1Panel.Location = new System.Drawing.Point(6, 85);
+            this.option1Panel.Name = "option1Panel";
+            this.option1Panel.Size = new System.Drawing.Size(137, 179);
+            this.option1Panel.TabIndex = 6;
             // 
             // saveButton
             // 
@@ -181,38 +213,6 @@
             this.loadScriptButton.UseVisualStyleBackColor = true;
             this.loadScriptButton.Click += new System.EventHandler(this.loadScriptButton_Click);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(7, 316);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 20);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "Edit Script";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.Location = new System.Drawing.Point(149, 306);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(92, 30);
-            this.deleteButton.TabIndex = 9;
-            this.deleteButton.Text = "Delete Line";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
-            // 
-            // clearButton
-            // 
-            this.clearButton.Location = new System.Drawing.Point(203, 349);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.clearButton.Size = new System.Drawing.Size(92, 30);
-            this.clearButton.TabIndex = 10;
-            this.clearButton.Text = "Clear Script";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
-            // 
             // Script
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -221,17 +221,17 @@
             this.Controls.Add(this.loadScriptButton);
             this.Controls.Add(this.runScriptButton);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.optionsGroupBox);
+            this.Controls.Add(this.scriptGroupBox);
             this.Controls.Add(this.loopTextBox);
             this.Controls.Add(this.loopLabel);
             this.Name = "Script";
             this.Text = "Script";
             this.Load += new System.EventHandler(this.Script_Load_1);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.scriptGroupBox.ResumeLayout(false);
+            this.scriptGroupBox.PerformLayout();
+            this.optionsGroupBox.ResumeLayout(false);
+            this.optionsGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,18 +241,18 @@
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Label loopLabel;
         private System.Windows.Forms.TextBox loopTextBox;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox scriptGroupBox;
         private System.Windows.Forms.ComboBox commandBox;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.GroupBox optionsGroupBox;
+        private System.Windows.Forms.Panel option1Panel;
+        private System.Windows.Forms.Panel option2Panel;
         private System.Windows.Forms.TextBox scriptTextBox;
         private System.Windows.Forms.TextBox amountTextBox;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button runScriptButton;
         private System.Windows.Forms.Button loadScriptButton;
         private System.Windows.Forms.TextBox amount2TextBox;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox editCheckBox;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button clearButton;
     }

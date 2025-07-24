@@ -21,9 +21,16 @@ namespace DAL
         void UpdatePhoneNumber(User user, string phoneNumber);
         void UpdateAddress(User user, string address);
         void UpdateRole(User user, string role);
+        void UpdatePerm(User user, string perm, bool value);
         bool CreateUser(string username, string password, string role);
         bool DeleteUser(User user);
         string GetUsername(User user);
         string GetRole(User user);
+        Dictionary<string, bool> GetPerms(User user);
+        string GetFirstName(User user);
+        string GetLastName(User user);
+        string GetPhoneNumber(User user);
+        string GetAddress(User user);
+
     }
 }

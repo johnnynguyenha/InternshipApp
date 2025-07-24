@@ -13,7 +13,9 @@ using Model;
 namespace InternshipApp
 {
 
-    // form for changing password from manage menu (admin is changing someone else's password).
+    /// <summary>
+    /// Form for changing the password of a user using Admin privileges.
+    /// </summary>
     public partial class AdminChangePassword : Form
     {
         private readonly UserService _userService;
@@ -31,13 +33,27 @@ namespace InternshipApp
 
         // EVENTS //
 
-        // user presses apply button to change password. display message if successful or not.
+       /// <summary>
+       /// User presses apply button. Checks fields and applies new password.
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
 
         private void applyButton_Click(object sender, EventArgs e)
         {
                 string newpassword = newPasswordBox.Text;
                 string confirmpassword = confirmPasswordBox.Text;
                 string message = "";
+            if (string.IsNullOrEmpty(newpassword) || string.IsNullOrEmpty(confirmpassword))
+            {
+                MessageBox.Show("Please fill in all fields.");
+                return;
+            }
+            if (newpassword != confirmpassword)
+                {
+                    MessageBox.Show("New password is not the same as confirm password.");
+                    return;
+                }
                 if (_userService.ChangePasswordNoOld(_username, newpassword, confirmpassword, out message))
                 {
                     MessageBox.Show(message);

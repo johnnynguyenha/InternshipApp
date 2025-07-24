@@ -8,6 +8,9 @@ using SerialCommunication;
 
 namespace InternshipApp
 {
+    /// <summary>
+    /// Class representing the settings for the communication page.
+    /// </summary>
     public class CommPageSettings
     {
         public string PortName { get; set; }

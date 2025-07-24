@@ -36,6 +36,16 @@ namespace InternshipApp
             _username = usernameBox.Text;
             string newpassword = newPasswordBox.Text;
             string confirmpassword = confirmPasswordBox.Text;
+            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(newpassword) || string.IsNullOrEmpty(confirmpassword))
+            {
+                MessageBox.Show("Please fill out all fields");
+                return;
+            }
+            if (newpassword != confirmpassword)
+            {
+                MessageBox.Show("Passwords do not match. Please try again.");
+                return;
+            }
             if (_userService.ResetPassword(_username, newpassword, confirmpassword, out string message))
             {
                 MessageBox.Show(message);
