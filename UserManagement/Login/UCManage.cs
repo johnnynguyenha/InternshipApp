@@ -198,6 +198,14 @@ namespace InternshipApp.Login
             permissionCheckBox.Visible = setting;
             _editVisible = setting;
             passwordBox.Enabled = false;
+
+            if (usernameBox.Text == "admin")
+            {
+                permissionCheckBox.Enabled = false;
+            } else
+            {
+                permissionCheckBox.Enabled = true;
+            }
         }
 
         /// <summary>
@@ -235,6 +243,18 @@ namespace InternshipApp.Login
                 MessageBox.Show($"Error filling user details: {ex.Message}");
                 return;
 
+            }
+            if (selectedUsername == "admin")
+            {
+                permissionCheckBox.Enabled = false;
+                usernameBox.Enabled = false;
+                roleBox.Enabled = false;
+            }
+            else
+            {
+                permissionCheckBox.Enabled = true;
+                usernameBox.Enabled = true;
+                roleBox.Enabled = true;
             }
         }
         // EVENTS //
@@ -309,13 +329,8 @@ namespace InternshipApp.Login
                 MessageBox.Show("No changes were made.");
                 return;
             }
-            if (string.IsNullOrEmpty(usernameBox.Text) || string.IsNullOrEmpty(roleBox.Text))
-            {
-                MessageBox.Show("Username and Role are required fields.");
-                return;
-            }
-            if (roleBox.Text != "Admin" || roleBox.Text != "User")
-            {
+            if (role != "Admin" && role != "User")
+            {   
                 MessageBox.Show("Role must be either 'Admin' or 'User'.");
                 return;
             }
